@@ -6,13 +6,10 @@ import org.junit.jupiter.api.Assertions;
 
 public class SwapperTest extends Assert {
 
-    private SwappableNumber firstNum;
-    private SwappableNumber secondNum;
-
     private void testSwapTemplate(String first, String second){
 
-        firstNum = new SwappableNumber(first);
-        secondNum = new SwappableNumber(second);
+        SwappableNumber firstNum = new SwappableNumber(first);
+        SwappableNumber secondNum = new SwappableNumber(second);
 
         SwappableNumber testSwappedFirstNum = new SwappableNumber(first);
         SwappableNumber testSwappedSecondNum = new SwappableNumber(second);
@@ -22,7 +19,7 @@ public class SwapperTest extends Assert {
         assertEquals(firstNum.getValue(), testSwappedSecondNum.getValue());
     }
     private void testSwapTemplate(long first, long second){
-        testSwapTemplate(first+"", second+"");
+        testSwapTemplate(String.valueOf(first), String.valueOf(second));
     }
 
 
@@ -31,11 +28,66 @@ public class SwapperTest extends Assert {
     }
 
     private void testSwapWrongValuesTemplate(double a, double b){
-        testSwapWrongValuesTemplate(a+"", b+"");
+        testSwapWrongValuesTemplate(String.valueOf(a), String.valueOf(b));
     }
 
     @Test
     public void testSwap() {
+
+        // (a, a), (a, -a), (-a, a), (-a, -a)
+        //zeros
+        testSwapTemplate(0, 0);
+        testSwapTemplate(-0, 0);
+        testSwapTemplate(0, -0);
+        testSwapTemplate(-0, -0);
+
+        //(a % 2 == 1)
+        testSwapTemplate(1, 1);
+        testSwapTemplate(-1, -1);
+        testSwapTemplate(-1, 1);
+        testSwapTemplate(1, -1);
+
+        testSwapTemplate(21, 21);
+        testSwapTemplate(-21, -21);
+        testSwapTemplate(-21, 21);
+        testSwapTemplate(21, -21);
+
+        testSwapTemplate(15, 15);
+        testSwapTemplate(-15, -15);
+        testSwapTemplate(-15, 15);
+        testSwapTemplate(15, -15);
+
+        // (a % 2 == 2)
+        testSwapTemplate(4, 4);
+        testSwapTemplate(-4, -4);
+        testSwapTemplate(4, -4);
+        testSwapTemplate(-4, 4);
+
+        testSwapTemplate(20, 20);
+        testSwapTemplate(-20, -20);
+        testSwapTemplate(20, -20);
+        testSwapTemplate(-20, 20);
+
+        testSwapTemplate(14, 14);
+        testSwapTemplate(-14, -14);
+        testSwapTemplate(14, -14);
+        testSwapTemplate(-14, 14);
+
+        //simple number
+        testSwapTemplate(7, 7);
+        testSwapTemplate(-7, -7);
+        testSwapTemplate(7, -7);
+        testSwapTemplate(-7, 7);
+
+        testSwapTemplate(3, 3);
+        testSwapTemplate(-3, -3);
+        testSwapTemplate(3, -3);
+        testSwapTemplate(-3, 3);
+
+        testSwapTemplate(Long.MAX_VALUE, Long.MIN_VALUE);
+        testSwapTemplate(Long.MIN_VALUE, Long.MAX_VALUE);
+        testSwapTemplate(Long.MAX_VALUE, Long.MAX_VALUE);
+        testSwapTemplate(Long.MIN_VALUE, Long.MIN_VALUE);
 
         testSwapTemplate(0, -100);
         testSwapTemplate(0, -50);
@@ -274,8 +326,6 @@ public class SwapperTest extends Assert {
         testSwapTemplate(50, Long.MIN_VALUE);
         testSwapTemplate(100, Long.MIN_VALUE);
 
-        testSwapTemplate(Long.MAX_VALUE, Long.MIN_VALUE);
-        testSwapTemplate(Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
     @Test
