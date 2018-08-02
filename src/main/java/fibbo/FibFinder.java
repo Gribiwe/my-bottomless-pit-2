@@ -1,45 +1,38 @@
 package fibbo;
 
+import exception.GribiweException;
+
 import java.math.BigInteger;
 import java.util.Scanner;
 
 public class FibFinder {
-    private static FibFinder instance;
-
-    public static FibFinder getInstance() {
-
-        if (instance == null) {
-            instance = new FibFinder();
-        }
-
-        return instance;
-    }
 
     public BigInteger getFibonacci(BigInteger n) {
+
+        if (n == null) throw new GribiweException("Can't find fibonacci of null");
+
         if (n.compareTo(BigInteger.valueOf(100000)) > 0) {
-            System.out.println("Too high value");
-            return null;
+            throw new GribiweException("Too high value. Must be from 1 to 100 000. Your is: "+n);
         } else if (n.compareTo(BigInteger.ZERO) < 0) {
-            System.out.println("Too low value");
-            return null;
+            throw new GribiweException("Too low value. Must be from 1 to 100 000. Your is: "+n);
         }
 
-        BigInteger pre = BigInteger.ZERO;
-        BigInteger cur = BigInteger.ONE;
+        BigInteger current = BigInteger.ZERO;
+        BigInteger previous = BigInteger.ONE;
         BigInteger tmp;
+
         for (int i = 0; i < n.intValue(); i++) {
-            tmp = cur;
-//            cur += pre;
-            cur = cur.add(pre);
-            pre = tmp;
+            tmp = previous;
+            previous = previous.add(current);
+            current = tmp;
         }
-//        return null;
-        return pre;
-//        return 0;
+        return current;
 
     }
 
-    public void showMenu(Scanner scanner) {
+    public void showMenu() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("What number of fibonacci you want to find?");
         BigInteger answer = getFibonacci(scanner.nextBigInteger());
         if (answer != null) {

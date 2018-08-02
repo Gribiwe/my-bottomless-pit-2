@@ -24,7 +24,7 @@ public class FibFinderTest extends Assert{
 
     @BeforeClass
     public static void runFibFinder() {
-        testFib = FibFinder.getInstance();
+        testFib = new FibFinder();
     }
 
     private void testGetFibonacciTemplate(long n){

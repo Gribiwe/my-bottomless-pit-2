@@ -36,8 +36,13 @@ public class DayFinder {
     * @return day of week of {@code dayOfMonth}
     * @throws GribiweException if {@code dayOfMonth}
     *                          doesn't exist in this {@code month} in real life
+    *                          or some values is null
     */
    public DayOfWeek getDayOfWeek(DayOfWeek firstOfJanuaryDayOfWeek, Month month, int dayOfMonth) {
+
+      if (firstOfJanuaryDayOfWeek == null) throw new GribiweException("day of week of first of january is null. Can't work with null.");
+      if (month == null) throw new GribiweException("month is null. Can't work with null.");
+
       if (dayOfMonth < 1 || dayOfMonth > month.minLength()) {
          throw new GribiweException("This day doesn't exist in this month. It must be from 1 to " + month.minLength());
       }
@@ -62,7 +67,7 @@ public class DayFinder {
     *
     * @throws GribiweException if some of
     *                          variables is not integers or cant exist
-    *                          int real life
+    *                          int real life.
     */
    public void showMenu() {
 
