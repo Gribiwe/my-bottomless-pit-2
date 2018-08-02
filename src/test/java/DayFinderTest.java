@@ -1,30 +1,25 @@
 import dayey.DayFinder;
+import exception.GribiweException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+
+import java.time.DayOfWeek;
+import java.time.Month;
 
 public class DayFinderTest extends Assert{
 
     private static DayFinder testDayFinder;
-    private final static String days[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     @BeforeClass
     public static void runDayFinder() {
-        testDayFinder = DayFinder.getInstance();
+        testDayFinder = new DayFinder();
     }
 
-    private void testGetDayInfoTemplate(int dayOfWeekOfFirstOfJan, int month, int day, int realDayOfWeek) {
-        assertEquals(testDayFinder.getDayOfWeek(dayOfWeekOfFirstOfJan, month, day), days[realDayOfWeek-1]);
-    }
-
-    private void testGetDayInfoWithUnrealDataTemplate(int dayOfWeekOfFirstOfJan, int month, int day) {
-        assertEquals(testDayFinder.getDayOfWeek(dayOfWeekOfFirstOfJan, month, day), null);
-    }
     @Test
     public void testGetDayInfo() {
         testGetDayInfoTemplate(1, 7, 20, 5);//ITS TODAY YEY
-
-        // TODO: добить год
 
         // First day id MONDAY
         // JANUARY
@@ -161,22 +156,8 @@ public class DayFinderTest extends Assert{
         testGetDayInfoTemplate(7, 12, 8, 5);
         testGetDayInfoTemplate(7, 12, 31, 7);
     }
-
     @Test
     public void testGetDayInfoWithUnrealData() {
-        // UNREAL FIRST DAY OF JAN
-        testGetDayInfoWithUnrealDataTemplate(0, 1, 1);
-        testGetDayInfoWithUnrealDataTemplate(8, 1, 1);
-        testGetDayInfoWithUnrealDataTemplate(-1, 1, 1);
-        testGetDayInfoWithUnrealDataTemplate(Integer.MAX_VALUE, 1, 1);
-        testGetDayInfoWithUnrealDataTemplate(Integer.MIN_VALUE, 1, 1);
-
-        // UNREAL MONTH
-        testGetDayInfoWithUnrealDataTemplate(1, 0, 1);
-        testGetDayInfoWithUnrealDataTemplate(1, 13, 1);
-        testGetDayInfoWithUnrealDataTemplate(1, -1, 1);
-        testGetDayInfoWithUnrealDataTemplate(1, Integer.MAX_VALUE, 1);
-        testGetDayInfoWithUnrealDataTemplate(1, Integer.MIN_VALUE, 1);
 
         // UNREAL DAY
         // of january
@@ -214,5 +195,13 @@ public class DayFinderTest extends Assert{
         testGetDayInfoWithUnrealDataTemplate(1, 12, -1);
         testGetDayInfoWithUnrealDataTemplate(1, 12, Integer.MIN_VALUE);
 
+    }
+
+    private void testGetDayInfoTemplate(int dayOfWeekOfFirstOfJan, int month, int day, int realDayOfWeek) {
+        assertEquals(testDayFinder.getDayOfWeek(DayOfWeek.of(dayOfWeekOfFirstOfJan), Month.of(month), day), DayOfWeek.of(realDayOfWeek));
+    }
+
+    private void testGetDayInfoWithUnrealDataTemplate(int dayOfWeekOfFirstOfJan, int month, int day) {
+        Assertions.assertThrows(GribiweException.class, () -> testDayFinder.getDayOfWeek(DayOfWeek.of(dayOfWeekOfFirstOfJan), Month.of(month), day));
     }
 }
