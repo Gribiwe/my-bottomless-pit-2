@@ -42,7 +42,7 @@ public class Main {
                   GCDFinder.getInstance().showMenu(scanner);
                   break;
                case "4":
-                  FibFinder.getInstance().showMenu(scanner);
+                  new FibFinder().showMenu();
                   break;
                case "5":
                   new DayFinder().showMenu();
