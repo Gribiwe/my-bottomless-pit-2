@@ -49,6 +49,7 @@ public class FibFinderTest extends Assert{
 
     @Test
     public void testGetFibonacciWrongValues() {
+
         testGetFibonacciUnrealValuesTemplate(100001);
         testGetFibonacciUnrealValuesTemplate(100002);
         testGetFibonacciUnrealValuesTemplate(100003);

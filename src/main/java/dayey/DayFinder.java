@@ -40,7 +40,8 @@ public class DayFinder {
     */
    public DayOfWeek getDayOfWeek(DayOfWeek firstOfJanuaryDayOfWeek, Month month, int dayOfMonth) {
 
-      if (firstOfJanuaryDayOfWeek == null) throw new GribiweException("day of week of first of january is null. Can't work with null.");
+      if (firstOfJanuaryDayOfWeek == null)
+         throw new GribiweException("day of week of first of january is null. Can't work with null.");
       if (month == null) throw new GribiweException("month is null. Can't work with null.");
 
       if (dayOfMonth < 1 || dayOfMonth > month.minLength()) {
