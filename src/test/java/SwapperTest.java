@@ -6,7 +6,312 @@ import org.junit.jupiter.api.Assertions;
 
 public class SwapperTest extends Assert {
 
-    private void testSwapTemplate(String first, String second){
+    @Test
+    public void testSwap() {
+
+        // (a, a), (a, -a), (-a, a), (-a, -a)
+        //zeros
+        testSwap(0, 0);
+        testSwap(-0, 0);
+        testSwap(0, -0);
+        testSwap(-0, -0);
+
+        //(a % 2 == 1)
+        testSwap(1, 1);
+        testSwap(-1, -1);
+        testSwap(-1, 1);
+        testSwap(1, -1);
+
+        testSwap(21, 21);
+        testSwap(-21, -21);
+        testSwap(-21, 21);
+        testSwap(21, -21);
+
+        testSwap(15, 15);
+        testSwap(-15, -15);
+        testSwap(-15, 15);
+        testSwap(15, -15);
+
+        // (a % 2 == 2)
+        testSwap(4, 4);
+        testSwap(-4, -4);
+        testSwap(4, -4);
+        testSwap(-4, 4);
+
+        testSwap(20, 20);
+        testSwap(-20, -20);
+        testSwap(20, -20);
+        testSwap(-20, 20);
+
+        testSwap(14, 14);
+        testSwap(-14, -14);
+        testSwap(14, -14);
+        testSwap(-14, 14);
+
+        //simple number
+        testSwap(7, 7);
+        testSwap(-7, -7);
+        testSwap(7, -7);
+        testSwap(-7, 7);
+
+        testSwap(3, 3);
+        testSwap(-3, -3);
+        testSwap(3, -3);
+        testSwap(-3, 3);
+
+        testSwap(Long.MAX_VALUE, Long.MIN_VALUE);
+        testSwap(Long.MIN_VALUE, Long.MAX_VALUE);
+        testSwap(Long.MAX_VALUE, Long.MAX_VALUE);
+        testSwap(Long.MIN_VALUE, Long.MIN_VALUE);
+
+        testSwap(0, -100);
+        testSwap(0, -50);
+        testSwap(0, -20);
+        testSwap(0, -10);
+        testSwap(0, -3);
+        testSwap(0, -2);
+        testSwap(0, -1);
+        testSwap(0, 1);
+        testSwap(0, 2);
+        testSwap(0, 3);
+        testSwap(0, 10);
+        testSwap(0, 20);
+        testSwap(0, 50);
+        testSwap(0, 100);
+
+        testSwap(-100, 0);
+        testSwap(-50, 0);
+        testSwap(-20, 0);
+        testSwap(-10, 0);
+        testSwap(-3, 0);
+        testSwap(-2, 0);
+        testSwap(1, 0);
+        testSwap(2, 0);
+        testSwap(3, 0);
+        testSwap(10, 0);
+        testSwap(20, 0);
+        testSwap(50, 0);
+        testSwap(100, 0);
+
+        testSwap(5, -100);
+        testSwap(5, -50);
+        testSwap(5, -20);
+        testSwap(5, -10);
+        testSwap(5, -3);
+        testSwap(5, -2);
+        testSwap(5, -1);
+        testSwap(5, 1);
+        testSwap(5, 2);
+        testSwap(5, 3);
+        testSwap(5, 10);
+        testSwap(5, 20);
+        testSwap(5, 50);
+        testSwap(5, 100);
+
+        testSwap(-100, 5);
+        testSwap(-50, 5);
+        testSwap(-20, 5);
+        testSwap(-10, 5);
+        testSwap(-3, 5);
+        testSwap(-2, 5);
+        testSwap(1, 5);
+        testSwap(2, 5);
+        testSwap(3, 5);
+        testSwap(10, 5);
+        testSwap(20, 5);
+        testSwap(50, 5);
+        testSwap(100, 5);
+
+        testSwap(55, -100);
+        testSwap(55, -50);
+        testSwap(55, -20);
+        testSwap(55, -10);
+        testSwap(55, -3);
+        testSwap(55, -2);
+        testSwap(55, -1);
+        testSwap(55, 1);
+        testSwap(55, 2);
+        testSwap(55, 3);
+        testSwap(55, 10);
+        testSwap(55, 20);
+        testSwap(55, 50);
+        testSwap(55, 100);
+
+        testSwap(-100, 55);
+        testSwap(-50, 55);
+        testSwap(-20, 55);
+        testSwap(-10, 55);
+        testSwap(-3, 55);
+        testSwap(-2, 55);
+        testSwap(1, 55);
+        testSwap(2, 55);
+        testSwap(3, 55);
+        testSwap(10, 55);
+        testSwap(20, 55);
+        testSwap(50, 55);
+        testSwap(100, 55);
+
+        testSwap(1569, -100);
+        testSwap(1569, -50);
+        testSwap(1569, -20);
+        testSwap(1569, -10);
+        testSwap(1569, -3);
+        testSwap(1569, -2);
+        testSwap(1569, -1);
+        testSwap(1569, 1);
+        testSwap(1569, 2);
+        testSwap(1569, 3);
+        testSwap(1569, 10);
+        testSwap(1569, 20);
+        testSwap(1569, 50);
+        testSwap(1569, 100);
+
+        testSwap(-100, 1569);
+        testSwap(-50, 1569);
+        testSwap(-20, 1569);
+        testSwap(-10, 1569);
+        testSwap(-3, 1569);
+        testSwap(-2, 1569);
+        testSwap(1, 1569);
+        testSwap(2, 1569);
+        testSwap(3, 1569);
+        testSwap(10, 1569);
+        testSwap(20, 1569);
+        testSwap(50, 1569);
+        testSwap(100, 1569);
+
+        testSwap(Integer.MAX_VALUE, -100);
+        testSwap(Integer.MAX_VALUE, -50);
+        testSwap(Integer.MAX_VALUE, -20);
+        testSwap(Integer.MAX_VALUE, -10);
+        testSwap(Integer.MAX_VALUE, -3);
+        testSwap(Integer.MAX_VALUE, -2);
+        testSwap(Integer.MAX_VALUE, -1);
+        testSwap(Integer.MAX_VALUE, 1);
+        testSwap(Integer.MAX_VALUE, 2);
+        testSwap(Integer.MAX_VALUE, 3);
+        testSwap(Integer.MAX_VALUE, 10);
+        testSwap(Integer.MAX_VALUE, 20);
+        testSwap(Integer.MAX_VALUE, 50);
+        testSwap(Integer.MAX_VALUE, 100);
+
+        testSwap(-100, Integer.MAX_VALUE);
+        testSwap(-50, Integer.MAX_VALUE);
+        testSwap(-20, Integer.MAX_VALUE);
+        testSwap(-10, Integer.MAX_VALUE);
+        testSwap(-3, Integer.MAX_VALUE);
+        testSwap(-2, Integer.MAX_VALUE);
+        testSwap(1, Integer.MAX_VALUE);
+        testSwap(2, Integer.MAX_VALUE);
+        testSwap(3, Integer.MAX_VALUE);
+        testSwap(10, Integer.MAX_VALUE);
+        testSwap(20, Integer.MAX_VALUE);
+        testSwap(50, Integer.MAX_VALUE);
+        testSwap(100, Integer.MAX_VALUE);
+
+        testSwap(Integer.MIN_VALUE, -100);
+        testSwap(Integer.MIN_VALUE, -50);
+        testSwap(Integer.MIN_VALUE, -20);
+        testSwap(Integer.MIN_VALUE, -10);
+        testSwap(Integer.MIN_VALUE, -3);
+        testSwap(Integer.MIN_VALUE, -2);
+        testSwap(Integer.MIN_VALUE, -1);
+        testSwap(Integer.MIN_VALUE, 1);
+        testSwap(Integer.MIN_VALUE, 2);
+        testSwap(Integer.MIN_VALUE, 3);
+        testSwap(Integer.MIN_VALUE, 10);
+        testSwap(Integer.MIN_VALUE, 20);
+        testSwap(Integer.MIN_VALUE, 50);
+        testSwap(Integer.MIN_VALUE, 100);
+
+        testSwap(-100, Integer.MIN_VALUE);
+        testSwap(-50, Integer.MIN_VALUE);
+        testSwap(-20, Integer.MIN_VALUE);
+        testSwap(-10, Integer.MIN_VALUE);
+        testSwap(-3, Integer.MIN_VALUE);
+        testSwap(-2, Integer.MIN_VALUE);
+        testSwap(1, Integer.MIN_VALUE);
+        testSwap(2, Integer.MIN_VALUE);
+        testSwap(3, Integer.MIN_VALUE);
+        testSwap(10, Integer.MIN_VALUE);
+        testSwap(20, Integer.MIN_VALUE);
+        testSwap(50, Integer.MIN_VALUE);
+        testSwap(100, Integer.MIN_VALUE);
+
+        testSwap(Integer.MAX_VALUE, Integer.MIN_VALUE);
+        testSwap(Integer.MIN_VALUE, Integer.MAX_VALUE);
+
+        //
+
+        testSwap(Long.MAX_VALUE, -100);
+        testSwap(Long.MAX_VALUE, -50);
+        testSwap(Long.MAX_VALUE, -20);
+        testSwap(Long.MAX_VALUE, -10);
+        testSwap(Long.MAX_VALUE, -3);
+        testSwap(Long.MAX_VALUE, -2);
+        testSwap(Long.MAX_VALUE, -1);
+        testSwap(Long.MAX_VALUE, 1);
+        testSwap(Long.MAX_VALUE, 2);
+        testSwap(Long.MAX_VALUE, 3);
+        testSwap(Long.MAX_VALUE, 10);
+        testSwap(Long.MAX_VALUE, 20);
+        testSwap(Long.MAX_VALUE, 50);
+        testSwap(Long.MAX_VALUE, 100);
+
+        testSwap(-100, Long.MAX_VALUE);
+        testSwap(-50, Long.MAX_VALUE);
+        testSwap(-20, Long.MAX_VALUE);
+        testSwap(-10, Long.MAX_VALUE);
+        testSwap(-3, Long.MAX_VALUE);
+        testSwap(-2, Long.MAX_VALUE);
+        testSwap(1, Long.MAX_VALUE);
+        testSwap(2, Long.MAX_VALUE);
+        testSwap(3, Long.MAX_VALUE);
+        testSwap(10, Long.MAX_VALUE);
+        testSwap(20, Long.MAX_VALUE);
+        testSwap(50, Long.MAX_VALUE);
+        testSwap(100, Long.MAX_VALUE);
+
+        testSwap(Long.MIN_VALUE, -100);
+        testSwap(Long.MIN_VALUE, -50);
+        testSwap(Long.MIN_VALUE, -20);
+        testSwap(Long.MIN_VALUE, -10);
+        testSwap(Long.MIN_VALUE, -3);
+        testSwap(Long.MIN_VALUE, -2);
+        testSwap(Long.MIN_VALUE, -1);
+        testSwap(Long.MIN_VALUE, 1);
+        testSwap(Long.MIN_VALUE, 2);
+        testSwap(Long.MIN_VALUE, 3);
+        testSwap(Long.MIN_VALUE, 10);
+        testSwap(Long.MIN_VALUE, 20);
+        testSwap(Long.MIN_VALUE, 50);
+        testSwap(Long.MIN_VALUE, 100);
+
+        testSwap(-100, Long.MIN_VALUE);
+        testSwap(-50, Long.MIN_VALUE);
+        testSwap(-20, Long.MIN_VALUE);
+        testSwap(-10, Long.MIN_VALUE);
+        testSwap(-3, Long.MIN_VALUE);
+        testSwap(-2, Long.MIN_VALUE);
+        testSwap(1, Long.MIN_VALUE);
+        testSwap(2, Long.MIN_VALUE);
+        testSwap(3, Long.MIN_VALUE);
+        testSwap(10, Long.MIN_VALUE);
+        testSwap(20, Long.MIN_VALUE);
+        testSwap(50, Long.MIN_VALUE);
+        testSwap(100, Long.MIN_VALUE);
+
+    }
+
+    @Test
+    public void testSwapWrongValues() {
+        testSwapWrongValues(1, 0.0000004);
+        testSwapWrongValues(123.5, 12);
+        testSwapWrongValues(12, 151.12312);
+        testSwapWrongValues(123.5, 151.12312);
+    }
+
+    private void testSwap(String first, String second){
 
         SwappableNumber firstNum = new SwappableNumber(first);
         SwappableNumber secondNum = new SwappableNumber(second);
@@ -18,322 +323,16 @@ public class SwapperTest extends Assert {
         assertEquals(secondNum.getValue(), testSwappedFirstNum.getValue());
         assertEquals(firstNum.getValue(), testSwappedSecondNum.getValue());
     }
-    private void testSwapTemplate(long first, long second){
-        testSwapTemplate(String.valueOf(first), String.valueOf(second));
+    private void testSwap(long first, long second){
+        testSwap(String.valueOf(first), String.valueOf(second));
     }
 
 
-    private void testSwapWrongValuesTemplate(String a, String b){
+    private void testSwapWrongValues(String a, String b){
         Assertions.assertThrows(GribiweException.class, () -> new SwappableNumber(a).swap(new SwappableNumber(b)));
     }
 
-    private void testSwapWrongValuesTemplate(double a, double b){
-        testSwapWrongValuesTemplate(String.valueOf(a), String.valueOf(b));
+    private void testSwapWrongValues(double a, double b){
+        testSwapWrongValues(String.valueOf(a), String.valueOf(b));
     }
-
-    @Test
-    public void testSwap() {
-
-        // (a, a), (a, -a), (-a, a), (-a, -a)
-        //zeros
-        testSwapTemplate(0, 0);
-        testSwapTemplate(-0, 0);
-        testSwapTemplate(0, -0);
-        testSwapTemplate(-0, -0);
-
-        //(a % 2 == 1)
-        testSwapTemplate(1, 1);
-        testSwapTemplate(-1, -1);
-        testSwapTemplate(-1, 1);
-        testSwapTemplate(1, -1);
-
-        testSwapTemplate(21, 21);
-        testSwapTemplate(-21, -21);
-        testSwapTemplate(-21, 21);
-        testSwapTemplate(21, -21);
-
-        testSwapTemplate(15, 15);
-        testSwapTemplate(-15, -15);
-        testSwapTemplate(-15, 15);
-        testSwapTemplate(15, -15);
-
-        // (a % 2 == 2)
-        testSwapTemplate(4, 4);
-        testSwapTemplate(-4, -4);
-        testSwapTemplate(4, -4);
-        testSwapTemplate(-4, 4);
-
-        testSwapTemplate(20, 20);
-        testSwapTemplate(-20, -20);
-        testSwapTemplate(20, -20);
-        testSwapTemplate(-20, 20);
-
-        testSwapTemplate(14, 14);
-        testSwapTemplate(-14, -14);
-        testSwapTemplate(14, -14);
-        testSwapTemplate(-14, 14);
-
-        //simple number
-        testSwapTemplate(7, 7);
-        testSwapTemplate(-7, -7);
-        testSwapTemplate(7, -7);
-        testSwapTemplate(-7, 7);
-
-        testSwapTemplate(3, 3);
-        testSwapTemplate(-3, -3);
-        testSwapTemplate(3, -3);
-        testSwapTemplate(-3, 3);
-
-        testSwapTemplate(Long.MAX_VALUE, Long.MIN_VALUE);
-        testSwapTemplate(Long.MIN_VALUE, Long.MAX_VALUE);
-        testSwapTemplate(Long.MAX_VALUE, Long.MAX_VALUE);
-        testSwapTemplate(Long.MIN_VALUE, Long.MIN_VALUE);
-
-        testSwapTemplate(0, -100);
-        testSwapTemplate(0, -50);
-        testSwapTemplate(0, -20);
-        testSwapTemplate(0, -10);
-        testSwapTemplate(0, -3);
-        testSwapTemplate(0, -2);
-        testSwapTemplate(0, -1);
-        testSwapTemplate(0, 1);
-        testSwapTemplate(0, 2);
-        testSwapTemplate(0, 3);
-        testSwapTemplate(0, 10);
-        testSwapTemplate(0, 20);
-        testSwapTemplate(0, 50);
-        testSwapTemplate(0, 100);
-
-        testSwapTemplate(-100, 0);
-        testSwapTemplate(-50, 0);
-        testSwapTemplate(-20, 0);
-        testSwapTemplate(-10, 0);
-        testSwapTemplate(-3, 0);
-        testSwapTemplate(-2, 0);
-        testSwapTemplate(1, 0);
-        testSwapTemplate(2, 0);
-        testSwapTemplate(3, 0);
-        testSwapTemplate(10, 0);
-        testSwapTemplate(20, 0);
-        testSwapTemplate(50, 0);
-        testSwapTemplate(100, 0);
-
-        testSwapTemplate(5, -100);
-        testSwapTemplate(5, -50);
-        testSwapTemplate(5, -20);
-        testSwapTemplate(5, -10);
-        testSwapTemplate(5, -3);
-        testSwapTemplate(5, -2);
-        testSwapTemplate(5, -1);
-        testSwapTemplate(5, 1);
-        testSwapTemplate(5, 2);
-        testSwapTemplate(5, 3);
-        testSwapTemplate(5, 10);
-        testSwapTemplate(5, 20);
-        testSwapTemplate(5, 50);
-        testSwapTemplate(5, 100);
-
-        testSwapTemplate(-100, 5);
-        testSwapTemplate(-50, 5);
-        testSwapTemplate(-20, 5);
-        testSwapTemplate(-10, 5);
-        testSwapTemplate(-3, 5);
-        testSwapTemplate(-2, 5);
-        testSwapTemplate(1, 5);
-        testSwapTemplate(2, 5);
-        testSwapTemplate(3, 5);
-        testSwapTemplate(10, 5);
-        testSwapTemplate(20, 5);
-        testSwapTemplate(50, 5);
-        testSwapTemplate(100, 5);
-
-        testSwapTemplate(55, -100);
-        testSwapTemplate(55, -50);
-        testSwapTemplate(55, -20);
-        testSwapTemplate(55, -10);
-        testSwapTemplate(55, -3);
-        testSwapTemplate(55, -2);
-        testSwapTemplate(55, -1);
-        testSwapTemplate(55, 1);
-        testSwapTemplate(55, 2);
-        testSwapTemplate(55, 3);
-        testSwapTemplate(55, 10);
-        testSwapTemplate(55, 20);
-        testSwapTemplate(55, 50);
-        testSwapTemplate(55, 100);
-
-        testSwapTemplate(-100, 55);
-        testSwapTemplate(-50, 55);
-        testSwapTemplate(-20, 55);
-        testSwapTemplate(-10, 55);
-        testSwapTemplate(-3, 55);
-        testSwapTemplate(-2, 55);
-        testSwapTemplate(1, 55);
-        testSwapTemplate(2, 55);
-        testSwapTemplate(3, 55);
-        testSwapTemplate(10, 55);
-        testSwapTemplate(20, 55);
-        testSwapTemplate(50, 55);
-        testSwapTemplate(100, 55);
-
-        testSwapTemplate(1569, -100);
-        testSwapTemplate(1569, -50);
-        testSwapTemplate(1569, -20);
-        testSwapTemplate(1569, -10);
-        testSwapTemplate(1569, -3);
-        testSwapTemplate(1569, -2);
-        testSwapTemplate(1569, -1);
-        testSwapTemplate(1569, 1);
-        testSwapTemplate(1569, 2);
-        testSwapTemplate(1569, 3);
-        testSwapTemplate(1569, 10);
-        testSwapTemplate(1569, 20);
-        testSwapTemplate(1569, 50);
-        testSwapTemplate(1569, 100);
-
-        testSwapTemplate(-100, 1569);
-        testSwapTemplate(-50, 1569);
-        testSwapTemplate(-20, 1569);
-        testSwapTemplate(-10, 1569);
-        testSwapTemplate(-3, 1569);
-        testSwapTemplate(-2, 1569);
-        testSwapTemplate(1, 1569);
-        testSwapTemplate(2, 1569);
-        testSwapTemplate(3, 1569);
-        testSwapTemplate(10, 1569);
-        testSwapTemplate(20, 1569);
-        testSwapTemplate(50, 1569);
-        testSwapTemplate(100, 1569);
-
-        testSwapTemplate(Integer.MAX_VALUE, -100);
-        testSwapTemplate(Integer.MAX_VALUE, -50);
-        testSwapTemplate(Integer.MAX_VALUE, -20);
-        testSwapTemplate(Integer.MAX_VALUE, -10);
-        testSwapTemplate(Integer.MAX_VALUE, -3);
-        testSwapTemplate(Integer.MAX_VALUE, -2);
-        testSwapTemplate(Integer.MAX_VALUE, -1);
-        testSwapTemplate(Integer.MAX_VALUE, 1);
-        testSwapTemplate(Integer.MAX_VALUE, 2);
-        testSwapTemplate(Integer.MAX_VALUE, 3);
-        testSwapTemplate(Integer.MAX_VALUE, 10);
-        testSwapTemplate(Integer.MAX_VALUE, 20);
-        testSwapTemplate(Integer.MAX_VALUE, 50);
-        testSwapTemplate(Integer.MAX_VALUE, 100);
-
-        testSwapTemplate(-100, Integer.MAX_VALUE);
-        testSwapTemplate(-50, Integer.MAX_VALUE);
-        testSwapTemplate(-20, Integer.MAX_VALUE);
-        testSwapTemplate(-10, Integer.MAX_VALUE);
-        testSwapTemplate(-3, Integer.MAX_VALUE);
-        testSwapTemplate(-2, Integer.MAX_VALUE);
-        testSwapTemplate(1, Integer.MAX_VALUE);
-        testSwapTemplate(2, Integer.MAX_VALUE);
-        testSwapTemplate(3, Integer.MAX_VALUE);
-        testSwapTemplate(10, Integer.MAX_VALUE);
-        testSwapTemplate(20, Integer.MAX_VALUE);
-        testSwapTemplate(50, Integer.MAX_VALUE);
-        testSwapTemplate(100, Integer.MAX_VALUE);
-
-        testSwapTemplate(Integer.MIN_VALUE, -100);
-        testSwapTemplate(Integer.MIN_VALUE, -50);
-        testSwapTemplate(Integer.MIN_VALUE, -20);
-        testSwapTemplate(Integer.MIN_VALUE, -10);
-        testSwapTemplate(Integer.MIN_VALUE, -3);
-        testSwapTemplate(Integer.MIN_VALUE, -2);
-        testSwapTemplate(Integer.MIN_VALUE, -1);
-        testSwapTemplate(Integer.MIN_VALUE, 1);
-        testSwapTemplate(Integer.MIN_VALUE, 2);
-        testSwapTemplate(Integer.MIN_VALUE, 3);
-        testSwapTemplate(Integer.MIN_VALUE, 10);
-        testSwapTemplate(Integer.MIN_VALUE, 20);
-        testSwapTemplate(Integer.MIN_VALUE, 50);
-        testSwapTemplate(Integer.MIN_VALUE, 100);
-
-        testSwapTemplate(-100, Integer.MIN_VALUE);
-        testSwapTemplate(-50, Integer.MIN_VALUE);
-        testSwapTemplate(-20, Integer.MIN_VALUE);
-        testSwapTemplate(-10, Integer.MIN_VALUE);
-        testSwapTemplate(-3, Integer.MIN_VALUE);
-        testSwapTemplate(-2, Integer.MIN_VALUE);
-        testSwapTemplate(1, Integer.MIN_VALUE);
-        testSwapTemplate(2, Integer.MIN_VALUE);
-        testSwapTemplate(3, Integer.MIN_VALUE);
-        testSwapTemplate(10, Integer.MIN_VALUE);
-        testSwapTemplate(20, Integer.MIN_VALUE);
-        testSwapTemplate(50, Integer.MIN_VALUE);
-        testSwapTemplate(100, Integer.MIN_VALUE);
-
-        testSwapTemplate(Integer.MAX_VALUE, Integer.MIN_VALUE);
-        testSwapTemplate(Integer.MIN_VALUE, Integer.MAX_VALUE);
-
-        //
-
-        testSwapTemplate(Long.MAX_VALUE, -100);
-        testSwapTemplate(Long.MAX_VALUE, -50);
-        testSwapTemplate(Long.MAX_VALUE, -20);
-        testSwapTemplate(Long.MAX_VALUE, -10);
-        testSwapTemplate(Long.MAX_VALUE, -3);
-        testSwapTemplate(Long.MAX_VALUE, -2);
-        testSwapTemplate(Long.MAX_VALUE, -1);
-        testSwapTemplate(Long.MAX_VALUE, 1);
-        testSwapTemplate(Long.MAX_VALUE, 2);
-        testSwapTemplate(Long.MAX_VALUE, 3);
-        testSwapTemplate(Long.MAX_VALUE, 10);
-        testSwapTemplate(Long.MAX_VALUE, 20);
-        testSwapTemplate(Long.MAX_VALUE, 50);
-        testSwapTemplate(Long.MAX_VALUE, 100);
-
-        testSwapTemplate(-100, Long.MAX_VALUE);
-        testSwapTemplate(-50, Long.MAX_VALUE);
-        testSwapTemplate(-20, Long.MAX_VALUE);
-        testSwapTemplate(-10, Long.MAX_VALUE);
-        testSwapTemplate(-3, Long.MAX_VALUE);
-        testSwapTemplate(-2, Long.MAX_VALUE);
-        testSwapTemplate(1, Long.MAX_VALUE);
-        testSwapTemplate(2, Long.MAX_VALUE);
-        testSwapTemplate(3, Long.MAX_VALUE);
-        testSwapTemplate(10, Long.MAX_VALUE);
-        testSwapTemplate(20, Long.MAX_VALUE);
-        testSwapTemplate(50, Long.MAX_VALUE);
-        testSwapTemplate(100, Long.MAX_VALUE);
-
-        testSwapTemplate(Long.MIN_VALUE, -100);
-        testSwapTemplate(Long.MIN_VALUE, -50);
-        testSwapTemplate(Long.MIN_VALUE, -20);
-        testSwapTemplate(Long.MIN_VALUE, -10);
-        testSwapTemplate(Long.MIN_VALUE, -3);
-        testSwapTemplate(Long.MIN_VALUE, -2);
-        testSwapTemplate(Long.MIN_VALUE, -1);
-        testSwapTemplate(Long.MIN_VALUE, 1);
-        testSwapTemplate(Long.MIN_VALUE, 2);
-        testSwapTemplate(Long.MIN_VALUE, 3);
-        testSwapTemplate(Long.MIN_VALUE, 10);
-        testSwapTemplate(Long.MIN_VALUE, 20);
-        testSwapTemplate(Long.MIN_VALUE, 50);
-        testSwapTemplate(Long.MIN_VALUE, 100);
-
-        testSwapTemplate(-100, Long.MIN_VALUE);
-        testSwapTemplate(-50, Long.MIN_VALUE);
-        testSwapTemplate(-20, Long.MIN_VALUE);
-        testSwapTemplate(-10, Long.MIN_VALUE);
-        testSwapTemplate(-3, Long.MIN_VALUE);
-        testSwapTemplate(-2, Long.MIN_VALUE);
-        testSwapTemplate(1, Long.MIN_VALUE);
-        testSwapTemplate(2, Long.MIN_VALUE);
-        testSwapTemplate(3, Long.MIN_VALUE);
-        testSwapTemplate(10, Long.MIN_VALUE);
-        testSwapTemplate(20, Long.MIN_VALUE);
-        testSwapTemplate(50, Long.MIN_VALUE);
-        testSwapTemplate(100, Long.MIN_VALUE);
-
-    }
-
-    @Test
-    public void testSwapWrongValues() {
-        testSwapWrongValuesTemplate(1, 0.0000004);
-        testSwapWrongValuesTemplate(123.5, 12);
-        testSwapWrongValuesTemplate(12, 151.12312);
-        testSwapWrongValuesTemplate(123.5, 151.12312);
-    }
-
 }
