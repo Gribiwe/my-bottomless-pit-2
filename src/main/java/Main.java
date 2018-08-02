@@ -1,7 +1,7 @@
 import dayey.DayFinder;
 import exception.GribiweException;
 import fibbo.FibFinder;
-import first.VariableSwapper;
+import first.SwapperMenu;
 import second.ApartmentFinder;
 import gcd.GCDFinder;
 
@@ -33,7 +33,7 @@ public class Main {
                   System.exit(0);
                   break;
                case "1":
-                  VariableSwapper.getInstance().showMenu(scanner);
+                  new SwapperMenu().showMenu();
                   break;
                case "2":
                   ApartmentFinder.getInstance().showMenu(scanner);

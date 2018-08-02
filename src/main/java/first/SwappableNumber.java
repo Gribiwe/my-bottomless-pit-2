@@ -1,50 +1,75 @@
 package first;
 
+import exception.GribiweException;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+/**
+ * Class of number which can to swap
+ * with another swappable numbers
+ * without third variable.
+ * Uses BigInteger so you can use really big values.
+ *
+ * @author Gribiwe
+ * @see BigInteger
+ */
 public class SwappableNumber {
 
-    public SwappableNumber(String value) {
-        BigDecimal valueBigDecimal = new BigDecimal(value);
-        if (valueBigDecimal.add(new BigDecimal(valueBigDecimal.toBigInteger().negate())).compareTo(BigDecimal.ZERO) != 0) {
-            value = null;
-        } else {
-            this.value = valueBigDecimal.toBigInteger();
-        }
-    }
+   /**
+    * represents value of swappable number
+    */
+   private BigInteger value;
 
-    public SwappableNumber(BigInteger value) {
-        this.value = value;
-    }
+   /**
+    * Translates String representation of
+    * number into BigInteger value of
+    * swappable number.
+    *
+    * @param value String representation of number
+    * @throws GribiweException if {@code} value doesn't
+    *                          match to Integer.
+    */
+   public SwappableNumber(String value) {
+      BigInteger valueBigInteger;
 
-    private BigInteger value;
+      try {
+         valueBigInteger = new BigInteger(value);
 
-    public void setValue(BigInteger value) {
-        this.value = value;
-    }
+      } catch (NumberFormatException e) {
+         throw new GribiweException("Can't create swappable number. Your value is not a number: " + value, e);
+      }
 
-    public BigInteger getValue() {
-        return value;
-    }
+      this.value = valueBigInteger;
+   }
 
-    public SwappableNumber swap(SwappableNumber b) {
-        if (value == null) {
-            System.err.println("decimal was found, returned null");
-            return null;
-        } else if (b.getValue() == null){
-            System.err.println("decimal was found, returned null");
-            return null;
-        }
-        value = value.add(b.getValue());
-        b.setValue(b.getValue().add(value.negate()).negate());
-        value = value.add(b.getValue().negate());
+   public void setValue(BigInteger value) {
+      this.value = value;
+   }
 
-        return this;
-    }
+   public BigInteger getValue() {
+      return value;
+   }
 
-    @Override
-    public String toString() {
-        return value.toString();
-    }
+   /**
+    * Method for swapping value of current
+    * swappable number with value of another
+    * swappable number without third variable.
+    *
+    * @param b another one of Swappable numbers.
+    */
+   public void swap(SwappableNumber b) {
+
+      if (b == null) throw new GribiweException("Can't swap with null!");
+
+      value = value.add(b.getValue());
+      b.setValue(b.getValue().add(value.negate()).negate());
+      value = value.add(b.getValue().negate());
+
+   }
+
+   @Override
+   public String toString() {
+      return value.toString();
+   }
 }

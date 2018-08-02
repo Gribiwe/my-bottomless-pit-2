@@ -1,14 +1,10 @@
+import exception.GribiweException;
 import first.SwappableNumber;
-import first.VariableSwapper;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Random;
-
-public class VariableSwapperTest extends Assert {
+public class SwapperTest extends Assert {
 
     private SwappableNumber firstNum;
     private SwappableNumber secondNum;
@@ -21,7 +17,7 @@ public class VariableSwapperTest extends Assert {
         SwappableNumber testSwappedFirstNum = new SwappableNumber(first);
         SwappableNumber testSwappedSecondNum = new SwappableNumber(second);
 
-        assertNotEquals(testSwappedFirstNum.swap(testSwappedSecondNum), null);
+        testSwappedFirstNum.swap(testSwappedSecondNum);
         assertEquals(secondNum.getValue(), testSwappedFirstNum.getValue());
         assertEquals(firstNum.getValue(), testSwappedSecondNum.getValue());
     }
@@ -31,11 +27,7 @@ public class VariableSwapperTest extends Assert {
 
 
     private void testSwapWrongValuesTemplate(String a, String b){
-        firstNum = new SwappableNumber(a);
-        secondNum = new SwappableNumber(b);
-        SwappableNumber testSwappedFirstNum = new SwappableNumber(a);
-        SwappableNumber testSwappedSecondNum = new SwappableNumber(b);
-        assertEquals(testSwappedFirstNum.swap(testSwappedSecondNum), null);
+        Assertions.assertThrows(GribiweException.class, () -> new SwappableNumber(a).swap(new SwappableNumber(b)));
     }
 
     private void testSwapWrongValuesTemplate(double a, double b){
