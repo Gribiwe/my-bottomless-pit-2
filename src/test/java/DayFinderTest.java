@@ -23,6 +23,7 @@ public class DayFinderTest extends Assert {
 
    @BeforeClass
    public static void runDayFinder() {
+
       testDayFinder = new DayFinder();
 
       newOut = new ByteArrayOutputStream();

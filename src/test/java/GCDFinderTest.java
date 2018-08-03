@@ -16,11 +16,6 @@ public class GCDFinderTest extends Assert {
       testGCD = new GCDFinder();
    }
 
-   private void testGCD(long a, long b, long c, long d, long realAnswer) {
-      assertEquals(testGCD.gcd(BigInteger.valueOf(a), BigInteger.valueOf(b),
-              BigInteger.valueOf(c), BigInteger.valueOf(d)), BigInteger.valueOf(realAnswer));
-   }
-
    @Test
    public void testGCDWrongValuesAndNull() {
       testGCDWrongValues(null, BigInteger.ONE, BigInteger.ONE, BigInteger.ONE);
@@ -29,10 +24,6 @@ public class GCDFinderTest extends Assert {
       testGCDWrongValues(BigInteger.ONE, BigInteger.ONE, BigInteger.ONE, null);
 
       testGCDWrongValues(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO);
-   }
-
-   private void testGCDWrongValues(BigInteger a, BigInteger b, BigInteger c, BigInteger d){
-      Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(a, b, c, d));
    }
 
    @Test
@@ -52,7 +43,32 @@ public class GCDFinderTest extends Assert {
       testGCD(17, 19, 7, 3, 1);
       testGCD(22, 16, 9, 7, 1);
       testGCD(6, 8, 9, 16, 1);
+      testGCD(5, 6, 124, 9, 1);
 
+      // number which delivers to 2 up to they can't
+      testGCD(26, 40, 32, 12, 2);
+      testGCD(26, 20, 16, 6, 2);
+      testGCD(13, 10, 8, 3, 1);
+      testGCD(13, 5, 4, 3, 1);
+      testGCD(13, 5, 2, 3, 1);
+
+      // all numbers % 2 = 0
+      testGCD(16, 2, 4, 6, 2);
+      testGCD(160, 12, 14, 16, 2);
+      testGCD(8, 16, 14, 4, 2);
+      testGCD(8, 16, 32, 4, 4);
+
+      // all numbers % 2 = 1
+      testGCD(13, 3, 7, 19, 1);
+      testGCD(19, 9, 17, 35, 1);
+      testGCD(7, 35, 83, 41, 1);
+      testGCD(15, 33, 71, 37, 1);
+
+      // n * 10 values
+      testGCD(40, 30, 20, 50, 10);
+      testGCD(100, 50, 30, 10, 10);
+      testGCD(130, 60, 50, 20, 10);
+      testGCD(20, 20, 40, 60, 20);
 
       // CHECKING WITH 25 AND 1
       testGCD(25, 25, 25, 25, 25);
@@ -281,8 +297,24 @@ public class GCDFinderTest extends Assert {
       testGCD(1, 1, Long.MAX_VALUE, 1, 1);
       testGCD(1, Long.MAX_VALUE, 1, 1, 1);
 
+      BigInteger longMaxPlusOne = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE);
+
+      testGCD(longMaxPlusOne, longMaxPlusOne, longMaxPlusOne, longMaxPlusOne, longMaxPlusOne);
+
       testGCD(15, 10, 0, 15, 5);
 
    }
 
+   private void testGCD(long a, long b, long c, long d, long realAnswer) {
+      assertEquals(testGCD.gcd(BigInteger.valueOf(a), BigInteger.valueOf(b),
+              BigInteger.valueOf(c), BigInteger.valueOf(d)), BigInteger.valueOf(realAnswer));
+   }
+
+   private void testGCD(BigInteger a, BigInteger b, BigInteger c, BigInteger d, BigInteger realAnswer) {
+      assertEquals(testGCD.gcd(a, b, c, d), realAnswer);
+   }
+
+   private void testGCDWrongValues(BigInteger a, BigInteger b, BigInteger c, BigInteger d) {
+      Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(a, b, c, d));
+   }
 }

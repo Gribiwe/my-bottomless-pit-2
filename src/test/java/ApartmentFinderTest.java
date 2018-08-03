@@ -307,7 +307,7 @@ public class ApartmentFinderTest extends Assert {
          testGetApartInfoNull(BigInteger.ONE, BigInteger.ONE, null);
    }
 
-   public void testGetApartInfoNull(BigInteger floors, BigInteger apartmentsAtFloor, BigInteger apartmentNumber) {
+   private void testGetApartInfoNull(BigInteger floors, BigInteger apartmentsAtFloor, BigInteger apartmentNumber) {
          Assertions.assertThrows(GribiweException.class, () -> testApartmentFinder.getApartInfo(floors, apartmentsAtFloor, apartmentNumber));
    }
 

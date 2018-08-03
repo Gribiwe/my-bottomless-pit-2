@@ -64,6 +64,7 @@ public class SwapperTest extends Assert {
         testSwap(Long.MAX_VALUE, Long.MAX_VALUE);
         testSwap(Long.MIN_VALUE, Long.MIN_VALUE);
 
+        // zeros
         testSwap(0, -100);
         testSwap(0, -50);
         testSwap(0, -20);
@@ -71,6 +72,7 @@ public class SwapperTest extends Assert {
         testSwap(0, -3);
         testSwap(0, -2);
         testSwap(0, -1);
+        testSwap(0, 0);
         testSwap(0, 1);
         testSwap(0, 2);
         testSwap(0, 3);
@@ -85,6 +87,7 @@ public class SwapperTest extends Assert {
         testSwap(-10, 0);
         testSwap(-3, 0);
         testSwap(-2, 0);
+        testSwap(0, 0);
         testSwap(1, 0);
         testSwap(2, 0);
         testSwap(3, 0);
@@ -100,6 +103,7 @@ public class SwapperTest extends Assert {
         testSwap(5, -3);
         testSwap(5, -2);
         testSwap(5, -1);
+        testSwap(5, 5);
         testSwap(5, 1);
         testSwap(5, 2);
         testSwap(5, 3);
@@ -115,6 +119,7 @@ public class SwapperTest extends Assert {
         testSwap(-3, 5);
         testSwap(-2, 5);
         testSwap(1, 5);
+        testSwap(5, 5);
         testSwap(2, 5);
         testSwap(3, 5);
         testSwap(10, 5);
@@ -129,6 +134,7 @@ public class SwapperTest extends Assert {
         testSwap(55, -3);
         testSwap(55, -2);
         testSwap(55, -1);
+        testSwap(55, 55);
         testSwap(55, 1);
         testSwap(55, 2);
         testSwap(55, 3);
@@ -144,6 +150,7 @@ public class SwapperTest extends Assert {
         testSwap(-3, 55);
         testSwap(-2, 55);
         testSwap(1, 55);
+        testSwap(55, 55);
         testSwap(2, 55);
         testSwap(3, 55);
         testSwap(10, 55);
@@ -158,6 +165,7 @@ public class SwapperTest extends Assert {
         testSwap(1569, -3);
         testSwap(1569, -2);
         testSwap(1569, -1);
+        testSwap(1569, 1569);
         testSwap(1569, 1);
         testSwap(1569, 2);
         testSwap(1569, 3);
@@ -172,6 +180,7 @@ public class SwapperTest extends Assert {
         testSwap(-10, 1569);
         testSwap(-3, 1569);
         testSwap(-2, 1569);
+        testSwap(1569, 1569);
         testSwap(1, 1569);
         testSwap(2, 1569);
         testSwap(3, 1569);
@@ -187,6 +196,7 @@ public class SwapperTest extends Assert {
         testSwap(Integer.MAX_VALUE, -3);
         testSwap(Integer.MAX_VALUE, -2);
         testSwap(Integer.MAX_VALUE, -1);
+        testSwap(Integer.MAX_VALUE, Integer.MAX_VALUE);
         testSwap(Integer.MAX_VALUE, 1);
         testSwap(Integer.MAX_VALUE, 2);
         testSwap(Integer.MAX_VALUE, 3);
@@ -216,6 +226,7 @@ public class SwapperTest extends Assert {
         testSwap(Integer.MIN_VALUE, -3);
         testSwap(Integer.MIN_VALUE, -2);
         testSwap(Integer.MIN_VALUE, -1);
+        testSwap(Integer.MIN_VALUE, Integer.MIN_VALUE);
         testSwap(Integer.MIN_VALUE, 1);
         testSwap(Integer.MIN_VALUE, 2);
         testSwap(Integer.MIN_VALUE, 3);
@@ -251,6 +262,7 @@ public class SwapperTest extends Assert {
         testSwap(Long.MAX_VALUE, -2);
         testSwap(Long.MAX_VALUE, -1);
         testSwap(Long.MAX_VALUE, 1);
+        testSwap(Long.MAX_VALUE, Long.MAX_VALUE);
         testSwap(Long.MAX_VALUE, 2);
         testSwap(Long.MAX_VALUE, 3);
         testSwap(Long.MAX_VALUE, 10);
@@ -280,6 +292,7 @@ public class SwapperTest extends Assert {
         testSwap(Long.MIN_VALUE, -2);
         testSwap(Long.MIN_VALUE, -1);
         testSwap(Long.MIN_VALUE, 1);
+        testSwap(Long.MIN_VALUE, Long.MIN_VALUE);
         testSwap(Long.MIN_VALUE, 2);
         testSwap(Long.MIN_VALUE, 3);
         testSwap(Long.MIN_VALUE, 10);
@@ -309,6 +322,15 @@ public class SwapperTest extends Assert {
         testSwapWrongValues(123.5, 12);
         testSwapWrongValues(12, 151.12312);
         testSwapWrongValues(123.5, 151.12312);
+        testSwapWrongValues(".", "2");
+        testSwapWrongValues("2", ".");
+        testSwapWrongValues("!", ".");
+        testSwapWrongValues("!", "2");
+        testSwapWrongValues("?", "2");
+        testSwapWrongValues("*", "2");
+        testSwapWrongValues("$", "2");
+        testSwapWrongValues("2", "*");
+        testSwapWrongValues("2", "$");
     }
 
     @Test

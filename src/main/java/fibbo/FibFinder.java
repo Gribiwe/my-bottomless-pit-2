@@ -26,7 +26,7 @@ public class FibFinder {
     * position {@code n} in fibonacci sequence.
     *
     * @param n is a number of index of the fibonacci
-    *          number at sequence. Starts from 1 up to 100 000
+    *          number at sequence. Starts from 1 up to 50 000
     * @return fibonacci number of {@code n}
     * @throws GribiweException if {@code n} is lower then 1 and higher
     *                          then 100 000 or n is null.
@@ -35,7 +35,7 @@ public class FibFinder {
 
       if (n == null) throw new GribiweException("Can't find fibonacci of null");
 
-      if (n.compareTo(BigInteger.valueOf(100000)) > 0) {
+      if (n.compareTo(BigInteger.valueOf(50000)) > 0) {
          throw new GribiweException("Too high value. Must be from 1 to 100 000. Your is: " + n);
 
       } else if (n.compareTo(BigInteger.ZERO) < 0) {
