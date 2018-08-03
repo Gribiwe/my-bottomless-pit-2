@@ -311,6 +311,12 @@ public class SwapperTest extends Assert {
         testSwapWrongValues(123.5, 151.12312);
     }
 
+    @Test
+    public void testSwapNull(){
+        Assertions.assertThrows(GribiweException.class, () -> new SwappableNumber(null));
+        Assertions.assertThrows(GribiweException.class, () -> new SwappableNumber("1").swap(null));
+    }
+
     private void testSwap(String first, String second){
 
         SwappableNumber firstNum = new SwappableNumber(first);

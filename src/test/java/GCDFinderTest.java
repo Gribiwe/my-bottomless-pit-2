@@ -22,14 +22,17 @@ public class GCDFinderTest extends Assert {
    }
 
    @Test
-   public void testGCDWrongValues() {
-      Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(null, BigInteger.ONE, BigInteger.ONE, BigInteger.ONE));
-      Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(BigInteger.ONE, null, BigInteger.ONE, BigInteger.ONE));
-      Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(BigInteger.ONE, BigInteger.ONE, null, BigInteger.ONE));
-      Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(BigInteger.ONE, BigInteger.ONE, BigInteger.ONE, null));
+   public void testGCDWrongValuesAndNull() {
+      testGCDWrongValues(null, BigInteger.ONE, BigInteger.ONE, BigInteger.ONE);
+      testGCDWrongValues(BigInteger.ONE, null, BigInteger.ONE, BigInteger.ONE);
+      testGCDWrongValues(BigInteger.ONE, BigInteger.ONE, null, BigInteger.ONE);
+      testGCDWrongValues(BigInteger.ONE, BigInteger.ONE, BigInteger.ONE, null);
 
-      Assertions.assertThrows(GribiweException.class,
-              () -> testGCD.gcd(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO));
+      testGCDWrongValues(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO);
+   }
+
+   private void testGCDWrongValues(BigInteger a, BigInteger b, BigInteger c, BigInteger d){
+      Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(a, b, c, d));
    }
 
    @Test

@@ -75,6 +75,6 @@ public class FibFinder {
          throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
       }
 
-      System.out.println(getFibonacci(answer));
+      System.out.println("answer: "+getFibonacci(answer));
    }
 }

@@ -27,11 +27,13 @@ public class SwappableNumber {
     * swappable number.
     *
     * @param value String representation of number
-    * @throws GribiweException if {@code} value doesn't
-    *                          match to Integer.
+    * @throws GribiweException if {@code value} doesn't
+    *                          match to Integer {@code value} is null
     */
    public SwappableNumber(String value) {
       BigInteger valueBigInteger;
+
+      if (value == null) throw new GribiweException("Can't create swappable number of null");
 
       try {
          valueBigInteger = new BigInteger(value);
@@ -57,6 +59,7 @@ public class SwappableNumber {
     * swappable number without third variable.
     *
     * @param b another one of Swappable numbers.
+    * @throws GribiweException if {@code b} is null
     */
    public void swap(SwappableNumber b) {
 

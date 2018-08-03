@@ -299,6 +299,18 @@ public class ApartmentFinderTest extends Assert {
         testGetApartInfoUnrealValues(Long.MIN_VALUE, Long.MIN_VALUE, Long.MIN_VALUE);
     }
 
+   @Test
+   public void testGetApartInfoNull() {
+         testGetApartInfoNull(null, null, null);
+         testGetApartInfoNull(null, BigInteger.ONE, BigInteger.ONE);
+         testGetApartInfoNull(BigInteger.ONE, null, BigInteger.ONE);
+         testGetApartInfoNull(BigInteger.ONE, BigInteger.ONE, null);
+   }
+
+   public void testGetApartInfoNull(BigInteger floors, BigInteger apartmentsAtFloor, BigInteger apartmentNumber) {
+         Assertions.assertThrows(GribiweException.class, () -> testApartmentFinder.getApartInfo(floors, apartmentsAtFloor, apartmentNumber));
+   }
+
    private void testGetApartInfo(String floors, String apartmentsAtFloor, String apartmentNumber, String realFloor, String realEntrance) {
       ApartmentInfo testingApartment = testApartmentFinder.getApartInfo(
               new BigInteger(floors), new BigInteger(apartmentsAtFloor), new BigInteger(apartmentNumber));
@@ -311,7 +323,8 @@ public class ApartmentFinderTest extends Assert {
               apartmentNumber+"", realFloor+"", realEntrance+"");
    }
    private void testGetApartInfo(long floors, long apartmentsAtFloor, BigInteger apartmentNumber, long realFloor, long realEntrance) {
-      testGetApartInfo(floors+"", apartmentsAtFloor+"", apartmentNumber+"", realFloor+"", realEntrance+"");
+      testGetApartInfo(floors+"", apartmentsAtFloor+"",
+              apartmentNumber+"", realFloor+"", realEntrance+"");
    }
 
    private void testGetApartInfoUnrealValues(long floors, long apartmentsAtFloor, long apartmentNumber) {
