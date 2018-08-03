@@ -6,9 +6,43 @@ import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class for finding information about apartment's floor and entrance.
+ * Contains of methods {@link #showMenu()} for integration with
+ * user and {@link #getApartInfo(BigInteger, BigInteger, BigInteger)}
+ * for finding apartment's info. Uses BigInteger for representation of values
+ *
+ * @author Gribiwe
+ * @see ApartmentInfo
+ * @see BigInteger
+ */
 public class ApartmentFinder {
 
+   /**
+    * Method which calculates apartment's information
+    * about floor and entrance having information
+    * about house sizing nad apartment number.
+    *
+    * @param floorsAtEntrance  number of floors at entrance
+    * @param apartmentsAtFloor number of apartments
+    *                          at floor
+    * @param apartmentNumber   number of apartment which
+    *                          info you want
+    * @return apartment information about entrance
+    * and floor
+    * @throws GribiweException if some of values
+    *                          lower then 1 or are null
+    */
    public ApartmentInfo getApartInfo(BigInteger floorsAtEntrance, BigInteger apartmentsAtFloor, BigInteger apartmentNumber) {
+
+      if (floorsAtEntrance == null)
+         throw new GribiweException("Number of floors at entrance is null. Can't work with null");
+
+      if (apartmentsAtFloor == null)
+         throw new GribiweException("Number of apartments at floor is null. Can't work with null");
+
+      if (apartmentNumber == null)
+         throw new GribiweException("Apartment number is null. Can't work with null");
 
       if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0)
          throw new GribiweException("Incorrect number of floors at entrance." +
@@ -39,7 +73,17 @@ public class ApartmentFinder {
       return new ApartmentInfo(floor, entrance);
    }
 
-
+   /**
+    * Method for integration with user via console
+    * input for initiate variables {@code floorsAtEntrance,
+    * apartmentsAtFloor, apartmentNumber} for calling of
+    * {@link #getApartInfo(BigInteger, BigInteger, BigInteger)}
+    * with entered values as arguments.
+    *
+    * @throws GribiweException if some of entered strokes doesn't
+    *                          match to integer or entered some
+    *                          values which lower then 1
+    */
    public void showMenu() {
       Scanner scanner = new Scanner(System.in);
 
@@ -62,6 +106,7 @@ public class ApartmentFinder {
       } catch (InputMismatchException e) {
          throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
       }
+
       if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0)
          throw new GribiweException("Incorrect number of apartments at floor." +
                  "The lowest possible number is 1. Your is: " + apartmentsAtFloor);
@@ -74,6 +119,7 @@ public class ApartmentFinder {
       } catch (InputMismatchException e) {
          throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
       }
+
       if (apartmentNumber.compareTo(BigInteger.ONE) < 0)
          throw new GribiweException("Incorrect number of apartment number." +
                  "The lowest possible number is 1. Your is: " + apartmentNumber);
