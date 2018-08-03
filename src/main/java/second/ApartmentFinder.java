@@ -1,72 +1,86 @@
 package second;
 
+import exception.GribiweException;
+
 import java.math.BigInteger;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ApartmentFinder {
-    private static ApartmentFinder instance;
 
-    public static ApartmentFinder getInstance() {
+   public ApartmentInfo getApartInfo(BigInteger floorsAtEntrance, BigInteger apartmentsAtFloor, BigInteger apartmentNumber) {
 
-        if (instance == null) {
-            instance = new ApartmentFinder();
-        }
+      if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0)
+         throw new GribiweException("Incorrect number of floors at entrance." +
+                 "The lowest possible number is 1. Your is: " + floorsAtEntrance);
 
-        return instance;
-    }
+      if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0)
+         throw new GribiweException("Incorrect number of apartments at floor." +
+                 "The lowest possible number is 1. Your is: " + apartmentsAtFloor);
 
-    public BigInteger getEntrance(BigInteger floorCount, BigInteger apartmentsAtFloor, BigInteger apartNumber) {
-        BigInteger entranceApartCount = getEntranceApartCount(floorCount, apartmentsAtFloor);
-        return (apartNumber.add(BigInteger.ONE.negate())).divide(entranceApartCount).add(BigInteger.ONE);
-    }
-
-    public BigInteger getEntranceApartCount(BigInteger floorCount, BigInteger apartmentsAtFloor) {
-        return floorCount.multiply(apartmentsAtFloor);
-    }
-
-    public BigInteger getFloor(BigInteger floorCount, BigInteger apartmentsAtFloor, BigInteger apartNumber) {
-
-        return (((apartNumber.add(BigInteger.ONE.negate()))
-                .add((getEntrance(floorCount, apartmentsAtFloor, apartNumber)
-                        .add(BigInteger.ONE.negate()).negate()).multiply(getEntranceApartCount(floorCount, apartmentsAtFloor))))
-                .divide(apartmentsAtFloor)).add(BigInteger.ONE);
-
-    }
-
-    public ApartmentInfo getApartInfo(BigInteger floorCount, BigInteger apartmentsAtFloor, BigInteger apartNumber) {
-
-        if (floorCount.compareTo(BigInteger.ZERO) < 1) {
-            System.out.println("Value of floor is incorrect");
-            return null;
-        } else if (apartmentsAtFloor.compareTo(BigInteger.ZERO) < 1) {
-            System.out.println("Value of apartments at floor is incorrect");
-            return null;
-        } else if (apartNumber.compareTo(BigInteger.ZERO) < 1 ) {
-            System.out.println("Value of apartment number is incorrect");
-            return null;
-        }
-
-        BigInteger entrance = getEntrance(floorCount, apartmentsAtFloor, apartNumber);
-        BigInteger floor = getFloor(floorCount, apartmentsAtFloor, apartNumber);
-
-        return new ApartmentInfo(floor, entrance);
-    }
+      if (apartmentNumber.compareTo(BigInteger.ONE) < 0)
+         throw new GribiweException("Incorrect number of apartment number." +
+                 "The lowest possible number is 1. Your is: " + apartmentNumber);
 
 
-    public void showMenu(Scanner scanner) {
-        System.out.println("How many floors?");
-        BigInteger floorCount = scanner.nextBigInteger();
+      BigInteger apartmentsAtEntrance = floorsAtEntrance.multiply(apartmentsAtFloor);
 
-        System.out.println("How many apartments on floor?");
-        BigInteger apartmentsAtFloor = scanner.nextBigInteger();
+      BigInteger entrance = (apartmentNumber.add(BigInteger.ONE.negate()))
+              .divide(apartmentsAtEntrance).add(BigInteger.ONE);
 
-        System.out.println("What apartment you want to find?");
-        BigInteger apartNumber = scanner.nextBigInteger();
+      BigInteger apartmentsAtPreviousEntrances = (entrance.add(BigInteger.ONE.negate()).negate())
+              .multiply(apartmentsAtEntrance);
 
-        ApartmentInfo result = getApartInfo(floorCount, apartmentsAtFloor, apartNumber);
-        if (result != null) {
-            System.out.println("entrance: " + result.getEntrance());
-            System.out.println("floor: " + result.getFloor());
-        }
-    }
+      BigInteger apartmentIndexAtEntrance = ((apartmentNumber.add(BigInteger.ONE.negate()))
+              .add(apartmentsAtPreviousEntrances));
+
+      BigInteger floor = apartmentIndexAtEntrance.divide(apartmentsAtFloor).add(BigInteger.ONE);
+
+      return new ApartmentInfo(floor, entrance);
+   }
+
+
+   public void showMenu() {
+      Scanner scanner = new Scanner(System.in);
+
+      System.out.println("How many floors?");
+      BigInteger floorsAtEntrance;
+      try {
+         floorsAtEntrance = scanner.nextBigInteger();
+      } catch (InputMismatchException e) {
+         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
+      }
+
+      if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0)
+         throw new GribiweException("Incorrect number of floors at entrance." +
+                 "The lowest possible number is 1. Your is: " + floorsAtEntrance);
+
+      System.out.println("How many apartments on floor?");
+      BigInteger apartmentsAtFloor;
+      try {
+         apartmentsAtFloor = scanner.nextBigInteger();
+      } catch (InputMismatchException e) {
+         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
+      }
+      if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0)
+         throw new GribiweException("Incorrect number of apartments at floor." +
+                 "The lowest possible number is 1. Your is: " + apartmentsAtFloor);
+
+
+      System.out.println("What apartment you want to find?");
+      BigInteger apartmentNumber;
+      try {
+         apartmentNumber = scanner.nextBigInteger();
+      } catch (InputMismatchException e) {
+         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
+      }
+      if (apartmentNumber.compareTo(BigInteger.ONE) < 0)
+         throw new GribiweException("Incorrect number of apartment number." +
+                 "The lowest possible number is 1. Your is: " + apartmentNumber);
+
+
+      ApartmentInfo result = getApartInfo(floorsAtEntrance, apartmentsAtFloor, apartmentNumber);
+      System.out.println("entrance: " + result.getEntrance());
+      System.out.println("floor: " + result.getFloor());
+   }
 }

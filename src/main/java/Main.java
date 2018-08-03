@@ -20,36 +20,35 @@ public class Main {
          System.out.println("1 - swapping of variables");
          System.out.println("2 - find my apartment");
          System.out.println("3 - find gcd of numbers");
-         System.out.println("4 - find fibanacci");
-         System.out.println("5 - find dayof the week of a day");
+         System.out.println("4 - find fibonacci");
+         System.out.println("5 - find day of the week of a day");
          System.out.println("0 - exit");
 
          try {
+            String answer = scanner.next();
 
-            switch (scanner.next()) {
+            if (answer == "0") {
+               System.out.println("See you next time!");
+               System.exit(0);
 
-               case "0":
-                  System.out.println("See you next time!");
-                  System.exit(0);
-                  break;
-               case "1":
-                  new SwapperMenu().showMenu();
-                  break;
-               case "2":
-                  ApartmentFinder.getInstance().showMenu(scanner);
-                  break;
-               case "3":
-                  GCDFinder.getInstance().showMenu(scanner);
-                  break;
-               case "4":
-                  new FibFinder().showMenu();
-                  break;
-               case "5":
-                  new DayFinder().showMenu();
-                  break;
-               default:
-                  System.out.println("What?");
-                  break;
+            } else if (answer == "1"){
+               new SwapperMenu().showMenu();
+
+            } else if (answer == "2"){
+               new ApartmentFinder().showMenu();
+
+            } else if (answer == "3"){
+               new GCDFinder().showMenu();
+
+            } else if (answer == "4"){
+               new FibFinder().showMenu();
+
+            } else if (answer == "5"){
+               new DayFinder().showMenu();
+
+            } else {
+               System.out.println("What?");
+               System.exit(0);
             }
          } catch (GribiweException e){
             System.out.println(e.getMessage());
