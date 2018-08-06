@@ -25,6 +25,11 @@ import java.util.Scanner;
 public class DayFinder {
 
    /**
+    * scanner for user's input
+    */
+   private Scanner scanner;
+
+   /**
     * Method for finding day of week.
     *
     * @param firstOfJanuaryDayOfWeek day of week of
@@ -39,13 +44,14 @@ public class DayFinder {
     *                          or some values is null
     */
    public DayOfWeek getDayOfWeek(DayOfWeek firstOfJanuaryDayOfWeek, Month month, int dayOfMonth) {
-
-      if (firstOfJanuaryDayOfWeek == null)
+      if (firstOfJanuaryDayOfWeek == null) {
          throw new GribiweException("day of week of first of january is null. Can't work with null.");
-      if (month == null) throw new GribiweException("month is null. Can't work with null.");
-
+      }
+      if (month == null) {
+         throw new GribiweException("month is null. Can't work with null.");
+      }
       if (dayOfMonth < 1 || dayOfMonth > month.minLength()) {
-         throw new GribiweException("This day doesn't exist in this month. It must be from 1 to " + month.minLength());
+         throw new GribiweException("This day doesn't exist in this month. It must be from 1 to " + month.minLength() + ". Your day of month is: " + dayOfMonth);
       }
 
       int dayOfYear = dayOfMonth + firstOfJanuaryDayOfWeek.getValue();
@@ -54,7 +60,9 @@ public class DayFinder {
       }
 
       dayOfYear = ((dayOfYear - 1) % 7);
-      dayOfYear = dayOfYear == 0 ? 7 : dayOfYear;
+      if (dayOfYear == 0) {
+         dayOfYear = 7;
+      }
 
       return DayOfWeek.of(dayOfYear);
    }
@@ -71,18 +79,10 @@ public class DayFinder {
     *                          int real life.
     */
    public void showMenu() {
-
-      Scanner scanner = new Scanner(System.in);
+      scanner = new Scanner(System.in);
 
       System.out.println("What is the 1st of january day of week?");
-
-      int answer;
-      try {
-         answer = scanner.nextByte();
-      } catch (InputMismatchException e) {
-         throw new GribiweException("");
-      }
-
+      int answer = getAnswerFromConsole();
       DayOfWeek firstOfJanuaryDayOfWeek;
       try {
          firstOfJanuaryDayOfWeek = DayOfWeek.of(answer);
@@ -91,12 +91,7 @@ public class DayFinder {
       }
 
       System.out.println("What month?");
-      try {
-         answer = scanner.nextInt();
-      } catch (InputMismatchException e) {
-         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
-      }
-
+      answer = getAnswerFromConsole();
       Month month;
       try {
          month = Month.of(answer);
@@ -105,12 +100,23 @@ public class DayFinder {
       }
 
       System.out.println("What day of month?");
-      int dayOfMonth = scanner.nextInt();
+      int dayOfMonth = getAnswerFromConsole();
       if (dayOfMonth < 1 || dayOfMonth > month.minLength()) {
-         System.out.println("This day doesn't exist in this month. It must be from 1 to " + month.minLength());
+         System.out.println("This day doesn't exist in this month. It must be from 1 to "
+                 + month.minLength() + ". Your day of month is: " + dayOfMonth);
       }
 
       System.out.println(getDayOfWeek(firstOfJanuaryDayOfWeek, month, dayOfMonth));
+   }
 
+   /**
+    * Waits until user will enter an int value
+    */
+   private int getAnswerFromConsole() {
+      try {
+         return scanner.nextInt();
+      } catch (InputMismatchException e) {
+         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
+      }
    }
 }

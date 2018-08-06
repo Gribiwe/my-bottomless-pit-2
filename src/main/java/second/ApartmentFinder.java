@@ -19,6 +19,11 @@ import java.util.Scanner;
 public class ApartmentFinder {
 
    /**
+    * scanner for user's input
+    */
+   private Scanner scanner;
+
+   /**
     * Method which calculates apartment's information
     * about floor and entrance having information
     * about house sizing nad apartment number.
@@ -34,39 +39,37 @@ public class ApartmentFinder {
     *                          lower then 1 or are null
     */
    public ApartmentInfo getApartInfo(BigInteger floorsAtEntrance, BigInteger apartmentsAtFloor, BigInteger apartmentNumber) {
-
-      if (floorsAtEntrance == null)
+      if (floorsAtEntrance == null) {
          throw new GribiweException("Number of floors at entrance is null. Can't work with null");
-
-      if (apartmentsAtFloor == null)
+      }
+      if (apartmentsAtFloor == null) {
          throw new GribiweException("Number of apartments at floor is null. Can't work with null");
-
-      if (apartmentNumber == null)
+      }
+      if (apartmentNumber == null) {
          throw new GribiweException("Apartment number is null. Can't work with null");
-
-      if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0)
+      }
+      if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of floors at entrance." +
                  "The lowest possible number is 1. Your is: " + floorsAtEntrance);
-
-      if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0)
+      }
+      if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of apartments at floor." +
                  "The lowest possible number is 1. Your is: " + apartmentsAtFloor);
-
-      if (apartmentNumber.compareTo(BigInteger.ONE) < 0)
+      }
+      if (apartmentNumber.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of apartment number." +
                  "The lowest possible number is 1. Your is: " + apartmentNumber);
-
-
+      }
       BigInteger apartmentsAtEntrance = floorsAtEntrance.multiply(apartmentsAtFloor);
 
-      BigInteger entrance = (apartmentNumber.add(BigInteger.ONE.negate()))
+      BigInteger entrance = (apartmentNumber.subtract(BigInteger.ONE))
               .divide(apartmentsAtEntrance).add(BigInteger.ONE);
 
-      BigInteger apartmentsAtPreviousEntrances = (entrance.add(BigInteger.ONE.negate()).negate())
+      BigInteger apartmentsAtPreviousEntrances = (entrance.subtract(BigInteger.ONE))
               .multiply(apartmentsAtEntrance);
 
-      BigInteger apartmentIndexAtEntrance = ((apartmentNumber.add(BigInteger.ONE.negate()))
-              .add(apartmentsAtPreviousEntrances));
+      BigInteger apartmentIndexAtEntrance = ((apartmentNumber.subtract(BigInteger.ONE))
+              .subtract(apartmentsAtPreviousEntrances));
 
       BigInteger floor = apartmentIndexAtEntrance.divide(apartmentsAtFloor).add(BigInteger.ONE);
 
@@ -85,48 +88,42 @@ public class ApartmentFinder {
     *                          values which lower then 1
     */
    public void showMenu() {
-      Scanner scanner = new Scanner(System.in);
+      scanner = new Scanner(System.in);
 
       System.out.println("How many floors?");
-      BigInteger floorsAtEntrance;
-      try {
-         floorsAtEntrance = scanner.nextBigInteger();
-      } catch (InputMismatchException e) {
-         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
-      }
-
-      if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0)
+      BigInteger floorsAtEntrance = getAnswerFromConsole();
+      if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of floors at entrance." +
                  "The lowest possible number is 1. Your is: " + floorsAtEntrance);
+      }
 
       System.out.println("How many apartments on floor?");
-      BigInteger apartmentsAtFloor;
-      try {
-         apartmentsAtFloor = scanner.nextBigInteger();
-      } catch (InputMismatchException e) {
-         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
-      }
-
-      if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0)
+      BigInteger apartmentsAtFloor = getAnswerFromConsole();
+      if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of apartments at floor." +
                  "The lowest possible number is 1. Your is: " + apartmentsAtFloor);
-
-
-      System.out.println("What apartment you want to find?");
-      BigInteger apartmentNumber;
-      try {
-         apartmentNumber = scanner.nextBigInteger();
-      } catch (InputMismatchException e) {
-         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
       }
 
-      if (apartmentNumber.compareTo(BigInteger.ONE) < 0)
+      System.out.println("What apartment you want to find?");
+      BigInteger apartmentNumber = getAnswerFromConsole();
+      if (apartmentNumber.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of apartment number." +
                  "The lowest possible number is 1. Your is: " + apartmentNumber);
-
+      }
 
       ApartmentInfo result = getApartInfo(floorsAtEntrance, apartmentsAtFloor, apartmentNumber);
       System.out.println("entrance: " + result.getEntrance());
       System.out.println("floor: " + result.getFloor());
+   }
+
+   /**
+    * Waits until user will enter an int value
+    */
+   private BigInteger getAnswerFromConsole() {
+      try {
+         return scanner.nextBigInteger();
+      } catch (InputMismatchException e) {
+         throw new GribiweException("You have entered stroke, which doesn't match the Integer: " + scanner.next());
+      }
    }
 }

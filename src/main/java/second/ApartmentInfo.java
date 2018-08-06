@@ -9,29 +9,41 @@ import java.math.BigInteger;
  */
 public class ApartmentInfo {
 
-    private BigInteger floor;
-    private BigInteger entrance;
+   /**
+    * Number of apartment's floor
+    * where apartment is being
+    */
+   private BigInteger floor;
+   /**
+    * Number of apartment's entrance
+    * where apartment is being
+    */
+   private BigInteger entrance;
 
-    /**
-     * Translates information of
-     * apartment's floor and entrance into
-     * composite apartment information
-     *
-     * @param floor number of apartment's floor
-     * @param entrance number of apartment's entrance
-     */
-    public ApartmentInfo(BigInteger floor, BigInteger entrance) {
-        this.floor = floor;
-        this.entrance = entrance;
-    }
+   /**
+    * Translates information of
+    * apartment's floor and entrance into
+    * composite apartment information
+    *
+    * @param floor    number of apartment's floor
+    * @param entrance number of apartment's entrance
+    */
+   public ApartmentInfo(BigInteger floor, BigInteger entrance) {
+      this.floor = floor;
+      this.entrance = entrance;
+   }
 
+   /**
+    * @return apartment's floor BigInteger value
+    */
+   public BigInteger getFloor() {
+      return floor;
+   }
 
-    public BigInteger getFloor() {
-
-        return floor;
-    }
-
-    public BigInteger getEntrance() {
-        return entrance;
-    }
+   /**
+    * @return apartment's entrance BigInteger value
+    */
+   public BigInteger getEntrance() {
+      return entrance;
+   }
 }

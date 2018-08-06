@@ -29,6 +29,11 @@ public class GCDFinderTest extends Assert {
    @Test
    public void testGCD() {
 
+      // source 1 - paper
+      // source 2 - https://ru.onlinemschool.com/math/assistance/number_theory/nod_nok/
+      // source 3 - https://planetcalc.ru/323/
+      // source 4 - https://planetcalc.ru/3298/
+
       // simple numbers
       testGCD(7, 7, 7, 7, 7);
       testGCD(3, 3, 3, 3, 3);
@@ -306,8 +311,8 @@ public class GCDFinderTest extends Assert {
    }
 
    private void testGCD(long a, long b, long c, long d, long realAnswer) {
-      assertEquals(testGCD.gcd(BigInteger.valueOf(a), BigInteger.valueOf(b),
-              BigInteger.valueOf(c), BigInteger.valueOf(d)), BigInteger.valueOf(realAnswer));
+      assertEquals(BigInteger.valueOf(realAnswer), testGCD.gcd(BigInteger.valueOf(a), BigInteger.valueOf(b),
+              BigInteger.valueOf(c), BigInteger.valueOf(d)));
    }
 
    private void testGCD(BigInteger a, BigInteger b, BigInteger c, BigInteger d, BigInteger realAnswer) {

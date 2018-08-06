@@ -66,8 +66,8 @@ public class SwappableNumber {
       if (b == null) throw new GribiweException("Can't swap with null!");
 
       value = value.add(b.getValue());
-      b.setValue(b.getValue().add(value.negate()).negate());
-      value = value.add(b.getValue().negate());
+      b.setValue(b.getValue().subtract(value).negate());
+      value = value.subtract(b.getValue());
 
    }
 
