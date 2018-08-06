@@ -7,15 +7,31 @@ import org.junit.jupiter.api.Assertions;
 
 import java.math.BigInteger;
 
+/**
+ * Class for testing GCDFinder
+ *
+ * @author Gribiwe
+ * @see GCDFinder
+ */
 public class GCDFinderTest extends Assert {
 
+   /**
+    * object of GCDFinder for
+    * testing his methods
+    */
    private static GCDFinder testGCD;
 
+   /**
+    * SetUp of testing object of GCDFinder
+    */
    @Before
    public void runGCDFinder() {
       testGCD = new GCDFinder();
    }
 
+   /**
+    * Testing of gcd() with wrong values. null is included
+    */
    @Test
    public void testGCDWrongValuesAndNull() {
       testGCDWrongValues(null, BigInteger.ONE, BigInteger.ONE, BigInteger.ONE);
@@ -26,6 +42,9 @@ public class GCDFinderTest extends Assert {
       testGCDWrongValues(BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO);
    }
 
+   /**
+    * Testing of gcd()
+    */
    @Test
    public void testGCD() {
 
@@ -307,18 +326,46 @@ public class GCDFinderTest extends Assert {
       testGCD(longMaxPlusOne, longMaxPlusOne, longMaxPlusOne, longMaxPlusOne, longMaxPlusOne);
 
       testGCD(15, 10, 0, 15, 5);
-
    }
 
+   /**
+    * Template for testing gcd()
+    *
+    * @param a          swap number
+    * @param b          apartment number
+    * @param c          third number
+    * @param d          fourth number
+    * @param realAnswer right number
+    *                   of gcd(a, b, c, d)
+    */
    private void testGCD(long a, long b, long c, long d, long realAnswer) {
       assertEquals(BigInteger.valueOf(realAnswer), testGCD.gcd(BigInteger.valueOf(a), BigInteger.valueOf(b),
               BigInteger.valueOf(c), BigInteger.valueOf(d)));
    }
 
+   /**
+    * Template for testing gcd()
+    * uses BigIntegers as arguments
+    *
+    * @param a          swap number
+    * @param b          apartment number
+    * @param c          third number
+    * @param d          fourth number
+    * @param realAnswer right number
+    *                   of gcd(a, b, c, d)
+    */
    private void testGCD(BigInteger a, BigInteger b, BigInteger c, BigInteger d, BigInteger realAnswer) {
       assertEquals(testGCD.gcd(a, b, c, d), realAnswer);
    }
 
+   /**
+    * Testing of gcd() with wrong arguments
+    *
+    * @param a swap number
+    * @param b apartment number
+    * @param c third number
+    * @param d fourth number
+    */
    private void testGCDWrongValues(BigInteger a, BigInteger b, BigInteger c, BigInteger d) {
       Assertions.assertThrows(GribiweException.class, () -> testGCD.gcd(a, b, c, d));
    }

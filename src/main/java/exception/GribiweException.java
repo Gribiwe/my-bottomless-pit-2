@@ -12,7 +12,7 @@ public class GribiweException extends RuntimeException {
     * why exception is thrown by human language
     * into GribiweException object
     *
-    * @param message stroke with information about
+    * @param message String with information about
     *                cause of exception explained
     *                by human's language
     */

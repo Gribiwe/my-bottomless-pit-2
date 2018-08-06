@@ -24,8 +24,8 @@ public class GCDFinder {
    /**
     * Method for calculating GCD of 4 numbers.
     *
-    * @param a first variable
-    * @param b second variable
+    * @param a swap variable
+    * @param b apartment variable
     * @param c third variable
     * @param d fourth variable
     * @return GCD of a, b, c, d
@@ -58,10 +58,10 @@ public class GCDFinder {
 
    /**
     * Calculates gcd of two variables
-    * uses for calculation gcd of four nums
+    * uses for calculation gcd of four numbers
     *
-    * @param a first number
-    * @param b second number
+    * @param a swap number
+    * @param b apartment number
     * @return gcd of a and b numbers
     */
    private BigInteger gcd(BigInteger a, BigInteger b) {

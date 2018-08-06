@@ -1,4 +1,4 @@
-package second;
+package apartment;
 
 import exception.GribiweException;
 
@@ -42,35 +42,34 @@ public class ApartmentFinder {
       if (floorsAtEntrance == null) {
          throw new GribiweException("Number of floors at entrance is null. Can't work with null");
       }
+
       if (apartmentsAtFloor == null) {
          throw new GribiweException("Number of apartments at floor is null. Can't work with null");
       }
+
       if (apartmentNumber == null) {
          throw new GribiweException("Apartment number is null. Can't work with null");
       }
+
       if (floorsAtEntrance.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of floors at entrance." +
                  "The lowest possible number is 1. Your is: " + floorsAtEntrance);
       }
+
       if (apartmentsAtFloor.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of apartments at floor." +
                  "The lowest possible number is 1. Your is: " + apartmentsAtFloor);
       }
+
       if (apartmentNumber.compareTo(BigInteger.ONE) < 0) {
          throw new GribiweException("Incorrect number of apartment number." +
                  "The lowest possible number is 1. Your is: " + apartmentNumber);
       }
+
       BigInteger apartmentsAtEntrance = floorsAtEntrance.multiply(apartmentsAtFloor);
-
-      BigInteger entrance = (apartmentNumber.subtract(BigInteger.ONE))
-              .divide(apartmentsAtEntrance).add(BigInteger.ONE);
-
-      BigInteger apartmentsAtPreviousEntrances = (entrance.subtract(BigInteger.ONE))
-              .multiply(apartmentsAtEntrance);
-
-      BigInteger apartmentIndexAtEntrance = ((apartmentNumber.subtract(BigInteger.ONE))
-              .subtract(apartmentsAtPreviousEntrances));
-
+      BigInteger entrance = apartmentNumber.subtract(BigInteger.ONE).divide(apartmentsAtEntrance).add(BigInteger.ONE);
+      BigInteger apartmentsAtPreviousEntrances = entrance.subtract(BigInteger.ONE).multiply(apartmentsAtEntrance);
+      BigInteger apartmentIndexAtEntrance = apartmentNumber.subtract(BigInteger.ONE).subtract(apartmentsAtPreviousEntrances);
       BigInteger floor = apartmentIndexAtEntrance.divide(apartmentsAtFloor).add(BigInteger.ONE);
 
       return new ApartmentInfo(floor, entrance);

@@ -1,8 +1,8 @@
 import dayey.DayFinder;
 import exception.GribiweException;
 import fibbo.FibFinder;
-import first.SwapperMenu;
-import second.ApartmentFinder;
+import swap.SwapperMenu;
+import apartment.ApartmentFinder;
 import gcd.GCDFinder;
 
 import java.util.Scanner;
@@ -23,7 +23,6 @@ import java.util.Scanner;
 public class Main {
 
    public static void main(String[] args) {
-
       Scanner scanner = new Scanner(System.in);
 
       System.out.println("what do you want to check?");
@@ -40,22 +39,16 @@ public class Main {
          if (answer.equals("0")) {
             System.out.println("See you next time!");
             System.exit(0);
-
          } else if (answer.equals("1")) {
             new SwapperMenu().showMenu();
-
          } else if (answer.equals("2")) {
             new ApartmentFinder().showMenu();
-
          } else if (answer.equals("3")) {
             new GCDFinder().showMenu();
-
          } else if (answer.equals("4")) {
             new FibFinder().showMenu();
-
          } else if (answer.equals("5")) {
             new DayFinder().showMenu();
-
          } else {
             System.out.println("What?");
             System.exit(0);

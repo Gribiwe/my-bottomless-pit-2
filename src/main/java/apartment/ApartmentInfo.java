@@ -1,4 +1,4 @@
-package second;
+package apartment;
 
 import java.math.BigInteger;
 
@@ -28,7 +28,7 @@ public class ApartmentInfo {
     * @param floor    number of apartment's floor
     * @param entrance number of apartment's entrance
     */
-   public ApartmentInfo(BigInteger floor, BigInteger entrance) {
+   ApartmentInfo(BigInteger floor, BigInteger entrance) {
       this.floor = floor;
       this.entrance = entrance;
    }

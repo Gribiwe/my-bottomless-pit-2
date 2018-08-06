@@ -13,37 +13,69 @@ import java.io.PrintStream;
 import java.time.DayOfWeek;
 import java.time.Month;
 
+/**
+ * Class for testing DayFinder
+ *
+ * @author Gribiwe
+ * @see DayFinder
+ */
 public class DayFinderTest extends Assert {
 
+   /**
+    * Using for saving old System.in
+    * static value
+    */
    private static InputStream oldIn;
+
+   /**
+    * Using for saving old System.out
+    * static value
+    */
    private static PrintStream oldOut;
+
+   /**
+    * Using for changing a System.out
+    * static value and easier interception
+    * of data from console
+    */
    private static ByteArrayOutputStream newOut;
 
+   /**
+    * object of DayFinder for
+    * testing his methods
+    */
    private static DayFinder testDayFinder;
 
+   /**
+    * SetUp method
+    */
    @BeforeClass
    public static void runDayFinder() {
-
       testDayFinder = new DayFinder();
-
-      newOut = new ByteArrayOutputStream();
 
       oldIn = System.in;
       oldOut = System.out;
-
+      newOut = new ByteArrayOutputStream();
       System.setOut(new PrintStream(newOut));
    }
 
+   /**
+    * Setting static values back
+    * with old values
+    */
    @AfterClass
    public static void setUpBack() {
       System.setOut(oldOut);
       System.setIn(oldIn);
    }
 
+   /**
+    * Testing of showMenu() and
+    * getDayInfo() via method
+    * {@link #testShowMenuGetDayInfo(int, int, int, int)}
+    */
    @Test
    public void testShowMenuGetDayInfo() {
-      testGetDayInfo(1, 7, 20, 5);//ITS TODAY YEY
-
       // First day id MONDAY
       // JANUARY
       testShowMenuGetDayInfo(1, 1, 1, 1);
@@ -180,9 +212,12 @@ public class DayFinderTest extends Assert {
       testShowMenuGetDayInfo(7, 12, 31, 7);
    }
 
+   /**
+    * Testing of showMenu() and getDayInfo() with wrong values via
+    * method {@link #testShowMenuGetDayInfoUnrealData(int, int)}
+    */
    @Test
-   public void testGetDayInfoWithUnrealData() {
-
+   public void testShowMenuGetDayInfoWithUnrealData() {
       // UNREAL DAY
       // of january
       testShowMenuGetDayInfoUnrealData(1, 32);
@@ -220,6 +255,10 @@ public class DayFinderTest extends Assert {
       testShowMenuGetDayInfoUnrealData(12, Integer.MIN_VALUE);
    }
 
+   /**
+    * Testing getDayInfo() with
+    * values which is null
+    */
    @Test
    public void testGetDayInfoNull() {
       Assertions.assertThrows(GribiweException.class,
@@ -230,16 +269,44 @@ public class DayFinderTest extends Assert {
               () -> testDayFinder.getDayOfWeek(null, null, 1));
    }
 
-
+   /**
+    * template method for testing getDayInfo()
+    *
+    * @param dayOfWeekOfFirstOfJan number of the day of week
+    *                              of swap of january
+    * @param month                 number of month which
+    *                              contains needed day of month
+    * @param day                   number of day of month
+    *                              which you want to find an information
+    * @param realDayOfWeek         number of right day of week
+    *                              of needed day
+    */
    private void testGetDayInfo(int dayOfWeekOfFirstOfJan, int month, int day, int realDayOfWeek) {
       assertEquals(testDayFinder.getDayOfWeek(DayOfWeek.of(dayOfWeekOfFirstOfJan), Month.of(month), day), DayOfWeek.of(realDayOfWeek));
    }
 
+   /**
+    * Method for calling testing methods for
+    * showMenu() and getDayInfo() with wrong values
+    *
+    * @param month      number of month
+    *                   with needed day which
+    *                   information you want to find
+    * @param dayOfMonth number of day of month which
+    *                   info you want to find
+    */
    private void testShowMenuGetDayInfoUnrealData(int month, int dayOfMonth) {
       testGetDayInfoWithUnrealData(month, dayOfMonth);
       testShowMenuUnrealData(month, dayOfMonth);
    }
 
+   /**
+    * Template method for testing showMenu()
+    * with wrong values
+    *
+    * @param month      number of month with needed day
+    * @param dayOfMonth number of day of month which info you want to find
+    */
    private void testShowMenuUnrealData(int month, int dayOfMonth) {
       newOut.reset();
       System.setIn(new ByteArrayInputStream(("1\r\n" + month + "\r\n" + dayOfMonth + "\r\n").getBytes()));
@@ -247,10 +314,29 @@ public class DayFinderTest extends Assert {
       Assertions.assertThrows(GribiweException.class, () -> testDayFinder.showMenu());
    }
 
+   /**
+    * Template method for testing
+    * getDayInfo() with wrong values
+    *
+    * @param month number of month with needed day
+    * @param day   number of day of month which info you want to find
+    */
    private void testGetDayInfoWithUnrealData(int month, int day) {
       Assertions.assertThrows(GribiweException.class, () -> testDayFinder.getDayOfWeek(DayOfWeek.of(1), Month.of(month), day));
    }
 
+   /**
+    * Template for testing showMenu()
+    *
+    * @param firstOfJanDayOfWeek number of the day of week
+    *                            of swap of january
+    * @param month               number of month which
+    *                            contains needed day of month
+    * @param dayOfMonth          number of day of month
+    *                            which you want to find an information
+    * @param realDayOfWeek       number of right day of week
+    *                            of needed day
+    */
    private void testShowMenu(int firstOfJanDayOfWeek, int month, int dayOfMonth, int realDayOfWeek) {
       newOut.reset();
       System.setIn(new ByteArrayInputStream((firstOfJanDayOfWeek + "\r\n" + month + "\r\n" + dayOfMonth + "\r\n").getBytes()));
@@ -262,6 +348,19 @@ public class DayFinderTest extends Assert {
       assertEquals(expectedOut, newOut.toString());
    }
 
+   /**
+    * Method for calling testing methods for
+    * showMenu() and getDayInfo()
+    *
+    * @param firstOfJanDayOfWeek number of the day of week
+    *                            of swap of january
+    * @param month               number of month which
+    *                            contains needed day of month
+    * @param dayOfMonth          number of day of month
+    *                            which you want to find an information
+    * @param realDayOfWeek       number of right day of week
+    *                            of needed day
+    */
    private void testShowMenuGetDayInfo(int firstOfJanDayOfWeek, int month, int dayOfMonth, int realDayOfWeek) {
       testShowMenu(firstOfJanDayOfWeek, month, dayOfMonth, realDayOfWeek);
       testGetDayInfo(firstOfJanDayOfWeek, month, dayOfMonth, realDayOfWeek);

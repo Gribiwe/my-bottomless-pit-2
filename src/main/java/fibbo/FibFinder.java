@@ -22,6 +22,12 @@ import java.util.Scanner;
 public class FibFinder {
 
    /**
+    * Max possible value of the number of fibonacci
+    * number index for this implementation
+    */
+   private final static BigInteger MAX_VALUE = BigInteger.valueOf(50000);
+
+   /**
     * Method which finding fibonacci number at
     * position {@code n} in fibonacci sequence.
     *
@@ -32,14 +38,16 @@ public class FibFinder {
     *                          then 100 000 or n is null.
     */
    public BigInteger getFibonacci(BigInteger n) {
+      if (n == null) {
+         throw new GribiweException("Can't find fibonacci of null");
+      }
 
-      if (n == null) throw new GribiweException("Can't find fibonacci of null");
+      if (n.compareTo(MAX_VALUE) > 0) {
+         throw new GribiweException("Too high value. Must be from 1 to 50 000. Your is: " + n);
+      }
 
-      if (n.compareTo(BigInteger.valueOf(50000)) > 0) {
-         throw new GribiweException("Too high value. Must be from 1 to 100 000. Your is: " + n);
-
-      } else if (n.compareTo(BigInteger.ZERO) < 0) {
-         throw new GribiweException("Too low value. Must be from 1 to 100 000. Your is: " + n);
+      if (n.compareTo(BigInteger.ZERO) < 0) {
+         throw new GribiweException("Too low value. Must be from 1 to 50 000. Your is: " + n);
       }
 
       BigInteger current = BigInteger.ZERO;
@@ -52,7 +60,6 @@ public class FibFinder {
          current = tmp;
       }
       return current;
-
    }
 
    /**
@@ -68,7 +75,6 @@ public class FibFinder {
 
       System.out.println("What number of fibonacci you want to find?");
       BigInteger answer;
-
       try {
          answer = scanner.nextBigInteger();
       } catch (InputMismatchException e) {

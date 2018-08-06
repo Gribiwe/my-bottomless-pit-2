@@ -1,8 +1,7 @@
-package first;
+package swap;
 
 import exception.GribiweException;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
@@ -33,11 +32,12 @@ public class SwappableNumber {
    public SwappableNumber(String value) {
       BigInteger valueBigInteger;
 
-      if (value == null) throw new GribiweException("Can't create swappable number of null");
+      if (value == null) {
+         throw new GribiweException("Can't create swappable number of null");
+      }
 
       try {
          valueBigInteger = new BigInteger(value);
-
       } catch (NumberFormatException e) {
          throw new GribiweException("Can't create swappable number. Your value is not a number: " + value, e);
       }
@@ -45,7 +45,7 @@ public class SwappableNumber {
       this.value = valueBigInteger;
    }
 
-   public void setValue(BigInteger value) {
+   private void setValue(BigInteger value) {
       this.value = value;
    }
 
@@ -62,17 +62,11 @@ public class SwappableNumber {
     * @throws GribiweException if {@code b} is null
     */
    public void swap(SwappableNumber b) {
-
-      if (b == null) throw new GribiweException("Can't swap with null!");
-
+      if (b == null) {
+         throw new GribiweException("Can't swap with null!");
+      }
       value = value.add(b.getValue());
       b.setValue(b.getValue().subtract(value).negate());
       value = value.subtract(b.getValue());
-
-   }
-
-   @Override
-   public String toString() {
-      return value.toString();
    }
 }

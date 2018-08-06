@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * Class for finding day of week
  * of some day of some month with having
- * information about day of week of the first
+ * information about day of week of the swap
  * of january.
  *
  * <p>Have method {@link #getDayOfWeek(DayOfWeek, Month, int)}
@@ -33,7 +33,7 @@ public class DayFinder {
     * Method for finding day of week.
     *
     * @param firstOfJanuaryDayOfWeek day of week of
-    *                                first of january.
+    *                                swap of january.
     *                                Must be from 1 to 7.
     * @param month                   month, which contains a day, which needed to
     *                                find a day of week. Must be from 1 to 12.
@@ -45,11 +45,13 @@ public class DayFinder {
     */
    public DayOfWeek getDayOfWeek(DayOfWeek firstOfJanuaryDayOfWeek, Month month, int dayOfMonth) {
       if (firstOfJanuaryDayOfWeek == null) {
-         throw new GribiweException("day of week of first of january is null. Can't work with null.");
+         throw new GribiweException("day of week of swap of january is null. Can't work with null.");
       }
+
       if (month == null) {
          throw new GribiweException("month is null. Can't work with null.");
       }
+
       if (dayOfMonth < 1 || dayOfMonth > month.minLength()) {
          throw new GribiweException("This day doesn't exist in this month. It must be from 1 to " + month.minLength() + ". Your day of month is: " + dayOfMonth);
       }
